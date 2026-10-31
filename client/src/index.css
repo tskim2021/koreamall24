@@ -292,13 +292,13 @@
   }
 
   /* The compact category panel and hero share one first-fold height on desktop. */
-  .home-hero-layout { min-height: 456px; }
-  .home-hero-sidebar { height: 456px; }
-  .home-hero-banner { height: 456px; }
+  .home-hero-layout { min-height: 320px; }
+  .home-hero-sidebar { height: 320px; }
+  .home-hero-banner { height: 320px; }
   @media (min-width: 1024px) and (max-width: 1279px) {
     .home-hero-layout,
     .home-hero-sidebar,
-    .home-hero-banner { height: 430px; min-height: 430px; }
+    .home-hero-banner { height: 300px; min-height: 300px; }
   }
   @media (max-width: 1023px) {
     .home-hero-layout { min-height: 0; }
