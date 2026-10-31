@@ -1,7 +1,7 @@
 import { trpc } from "@/lib/trpc";
 import { getOptimizedSrc } from "@/lib/imageProxy";
 import CategoryGrid from "@/components/CategoryGrid";
-import { Bell } from "lucide-react";
+import { ArrowRight, Bell, Flame, Sparkles, Tag } from "lucide-react";
 
 interface HomeSidebarProps {
   compact?: boolean; // true: 카테고리 페이지 - 카테고리 목록 + 상단배너만 표시
@@ -27,8 +27,8 @@ export default function HomeSidebar({ compact = false, hideTopBanner = false }: 
   );
 
   return (
-    <aside className="hidden lg:block w-[200px] xl:w-[220px] shrink-0 self-start sticky top-4">
-      <div>
+    <aside className="hidden lg:block w-[214px] xl:w-[236px] shrink-0 sticky top-4 h-full">
+      <div className={`${compact ? "rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden h-full" : ""}`}>
         {/* 사이드바 상단 배너 - DB 연동 (로딩 완료 후에만 표시) */}
         {!hideTopBanner && !sidebarTopLoading && sidebarTopBanners.length > 0 && (
           <div className="mb-3 space-y-2">
@@ -47,8 +47,36 @@ export default function HomeSidebar({ compact = false, hideTopBanner = false }: 
         )}
 
         {/* 사이드바 - 카테고리 */}
-        <div className="bg-white overflow-hidden">
+        <div className={compact ? "bg-gradient-to-b from-blue-50/80 to-white" : "bg-white overflow-hidden"}>
+          {compact && (
+            <div className="px-4 pt-4 pb-2 flex items-center justify-between">
+              <p className="text-sm font-bold text-slate-900">カテゴリー</p>
+              <span className="text-[10px] font-semibold tracking-wider text-blue-600">CATEGORY</span>
+            </div>
+          )}
           <CategoryGrid sidebarMode />
+          {compact && (
+            <>
+              <div className="mx-3 my-2 border-t border-blue-100" />
+              <div className="px-3 pb-3 space-y-1">
+                <a href="/ranking" className="flex items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-medium text-slate-700 hover:bg-white hover:text-blue-700 transition-colors">
+                  <Flame className="w-3.5 h-3.5 text-rose-500" />
+                  <span className="flex-1">売れ筋ランキング</span>
+                  <ArrowRight className="w-3 h-3 text-slate-400" />
+                </a>
+                <a href="/new-arrivals" className="flex items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-medium text-slate-700 hover:bg-white hover:text-blue-700 transition-colors">
+                  <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
+                  <span className="flex-1">新着商品</span>
+                  <ArrowRight className="w-3 h-3 text-slate-400" />
+                </a>
+                <a href="/sale" className="flex items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-medium text-slate-700 hover:bg-white hover:text-blue-700 transition-colors">
+                  <Tag className="w-3.5 h-3.5 text-violet-500" />
+                  <span className="flex-1">セール商品</span>
+                  <ArrowRight className="w-3 h-3 text-slate-400" />
+                </a>
+              </div>
+            </>
+          )}
         </div>
 
         {/* 아래 섹션들은 홈에서만 표시 (compact=false) */}

@@ -29,7 +29,7 @@ const FALLBACK_BANNERS: HeroBanner[] = [
   {
     id: "fallback-health",
     subtitleJa: "KOREAMALL24 ONLINE",
-    titleJa: "医薬品・健康商品を、安心して選ぶ",
+    titleJa: "健康商品を、安心して選ぶ",
     linkUrl: "/products",
     theme: "navy",
     ctaLabel: "商品を探す",
@@ -37,7 +37,7 @@ const FALLBACK_BANNERS: HeroBanner[] = [
   {
     id: "fallback-ranking",
     subtitleJa: "今週の人気アイテム",
-    titleJa: "みんなが選んでいる商品をチェック",
+    titleJa: "今週の人気商品をチェック",
     linkUrl: "/ranking",
     theme: "berry",
     ctaLabel: "ランキングを見る",
@@ -45,7 +45,7 @@ const FALLBACK_BANNERS: HeroBanner[] = [
   {
     id: "fallback-new",
     subtitleJa: "NEW & RECOMMENDED",
-    titleJa: "新着商品とおすすめ商品をまとめて見る",
+    titleJa: "新着・おすすめ商品を見る",
     linkUrl: "/new-arrivals",
     theme: "teal",
     ctaLabel: "新着商品を見る",
@@ -153,23 +153,23 @@ export default function BannerSlider({ heroImages }: BannerSliderProps = {}) {
             ) : (
               <div className={`banner-slide-inner qoo-hero-fallback qoo-hero-${banner.theme || "navy"} w-full`}>
                 {heroImages && heroImages.length > 0 && (
-                  <>
-                    <div className="qoo-hero-burst absolute right-[-4%] md:right-[2%] top-1/2 -translate-y-1/2 h-[95%] md:h-[130%] aspect-square" />
-                    <img
-                      src={heroImages[idx % heroImages.length]}
-                      alt=""
-                      aria-hidden="true"
-                      className="qoo-hero-product-img absolute right-[2%] md:right-[8%] top-1/2 -translate-y-1/2 h-[75%] md:h-[90%] w-auto object-contain"
-                      loading={idx === 0 ? "eager" : "lazy"}
-                    />
-                  </>
+                  <div className="qoo-hero-art" aria-hidden="true">
+                    <div className="qoo-hero-art-card">
+                      <img
+                        src={heroImages[idx % heroImages.length]}
+                        alt=""
+                        className="qoo-hero-product-img"
+                        loading={idx === 0 ? "eager" : "lazy"}
+                      />
+                    </div>
+                  </div>
                 )}
                 <div className="h-full flex items-center px-6 md:px-12 relative z-10">
-                  <div className="space-y-2 md:space-y-3 max-w-[75%] md:max-w-[58%]">
+                  <div className="space-y-2 md:space-y-4 max-w-[72%] md:max-w-[50%]">
                     {(banner as any).subtitleJa && (
                       <span className="qoo-hero-badge">{(banner as any).subtitleJa}</span>
                     )}
-                    <h2 className="qoo-hero-title text-lg md:text-5xl font-extrabold text-white block">
+                    <h2 className="qoo-hero-title text-2xl md:text-4xl xl:text-5xl leading-tight font-extrabold text-white block">
                       {(banner as any).titleJa}
                     </h2>
                     {(banner as any).ctaLabel && (
