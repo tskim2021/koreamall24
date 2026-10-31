@@ -124,16 +124,16 @@ export default function Home() {
         <h2 className="sr-only">正規品保証の海外医薬品・ジェネリック通販サイト</h2>
 
         {/* 1. Banner Slider with category sidebar alongside it - qoo10 style */}
-        <section className="pb-2 md:pb-3">
+        <section className="py-3 md:py-4">
           <div className="container">
             <div className="flex gap-3 items-stretch">
               <HomeSidebar compact hideTopBanner />
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 rounded-xl overflow-hidden shadow-sm">
                 <BannerSlider
                   heroImages={[
-                    "https://sorosoroseoul.com/uploads/item/1785119099/1785119099.jpg",
-                    "https://sorosoroseoul.com/uploads/item/1785119101/1785119101.jpg",
-                    "https://sorosoroseoul.com/uploads/item/1785119103/1785119103.jpg",
+                    "/images/products/1724934784/7Iqk7YGs66aw7IO320240829211636.jpg",
+                    "/images/products/1725534082/7Iqk7YGs66aw7IO320240905200245.jpg",
+                    "/images/products/1725613889/7Iqk7YGs66aw7IO320240906175947.jpg",
                   ]}
                 />
               </div>

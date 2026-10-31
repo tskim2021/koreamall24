@@ -12,6 +12,46 @@ interface BannerSliderProps {
   heroImages?: string[];
 }
 
+type HeroBanner = {
+  id: string | number;
+  titleJa: string;
+  subtitleJa?: string;
+  linkUrl?: string;
+  imageUrl?: string | null;
+  theme?: "navy" | "berry" | "teal";
+  ctaLabel?: string;
+};
+
+// Keep the first fold useful even when the admin banner table is empty or a
+// campaign has expired. These are intentionally local, text-led fallbacks;
+// real admin banners still take precedence as soon as they are available.
+const FALLBACK_BANNERS: HeroBanner[] = [
+  {
+    id: "fallback-health",
+    subtitleJa: "KOREAMALL24 ONLINE",
+    titleJa: "医薬品・健康商品を、安心して選ぶ",
+    linkUrl: "/products",
+    theme: "navy",
+    ctaLabel: "商品を探す",
+  },
+  {
+    id: "fallback-ranking",
+    subtitleJa: "今週の人気アイテム",
+    titleJa: "みんなが選んでいる商品をチェック",
+    linkUrl: "/ranking",
+    theme: "berry",
+    ctaLabel: "ランキングを見る",
+  },
+  {
+    id: "fallback-new",
+    subtitleJa: "NEW & RECOMMENDED",
+    titleJa: "新着商品とおすすめ商品をまとめて見る",
+    linkUrl: "/new-arrivals",
+    theme: "teal",
+    ctaLabel: "新着商品を見る",
+  },
+];
+
 export default function BannerSlider({ heroImages }: BannerSliderProps = {}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { data: banners, isLoading } = trpc.banner.list.useQuery(undefined, {
@@ -21,8 +61,9 @@ export default function BannerSlider({ heroImages }: BannerSliderProps = {}) {
     initialData: _serverData.banners?.length > 0 ? _serverData.banners : undefined,
   });
 
-  // 로딩 완료 후 등록된 배너가 있으면 사용, 없으면 빈 배열 (기본 더미 배너 제거)
-  const displayBanners = banners && banners.length > 0 ? banners : [];
+  // 등록된 배너가 없을 때도 메인 첫 화면이 비어 보이지 않도록 로컬 폴백을 사용한다.
+  const displayBanners: HeroBanner[] =
+    banners && banners.length > 0 ? (banners as HeroBanner[]) : FALLBACK_BANNERS;
 
   useEffect(() => {
     setCurrentIndex((prev) => (prev >= displayBanners.length ? 0 : prev));
@@ -60,11 +101,6 @@ export default function BannerSlider({ heroImages }: BannerSliderProps = {}) {
         />
       </>
     );
-  }
-
-  // 등록된 배너가 없으면 아무것도 표시하지 않음
-  if (displayBanners.length === 0) {
-    return null;
   }
 
   return (
@@ -115,10 +151,7 @@ export default function BannerSlider({ heroImages }: BannerSliderProps = {}) {
                 />
               </div>
             ) : (
-              <div
-                className="banner-slide-inner qoo-hero-fallback w-full"
-                style={{ background: "linear-gradient(135deg, #0f1c3f 0%, #1a2a5e 55%, #2d1b4e 100%)" }}
-              >
+              <div className={`banner-slide-inner qoo-hero-fallback qoo-hero-${banner.theme || "navy"} w-full`}>
                 {heroImages && heroImages.length > 0 && (
                   <>
                     <div className="qoo-hero-burst absolute right-[-4%] md:right-[2%] top-1/2 -translate-y-1/2 h-[95%] md:h-[130%] aspect-square" />
@@ -132,13 +165,16 @@ export default function BannerSlider({ heroImages }: BannerSliderProps = {}) {
                   </>
                 )}
                 <div className="h-full flex items-center px-6 md:px-12 relative z-10">
-                  <div className="space-y-2 md:space-y-3 max-w-[65%] md:max-w-[55%]">
+                  <div className="space-y-2 md:space-y-3 max-w-[75%] md:max-w-[58%]">
                     {(banner as any).subtitleJa && (
                       <span className="qoo-hero-badge">{(banner as any).subtitleJa}</span>
                     )}
                     <h2 className="qoo-hero-title text-lg md:text-5xl font-extrabold text-white block">
                       {(banner as any).titleJa}
                     </h2>
+                    {(banner as any).ctaLabel && (
+                      <span className="qoo-hero-cta">{(banner as any).ctaLabel} <span aria-hidden="true">→</span></span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -150,7 +186,7 @@ export default function BannerSlider({ heroImages }: BannerSliderProps = {}) {
                 className="flex-shrink-0"
                 style={{ width: `${100 / displayBanners.length}%` }}
               >
-                {hasImage ? <Link href={linkUrl}>{slideContent}</Link> : slideContent}
+                <Link href={linkUrl} aria-label={(banner as any).titleJa}>{slideContent}</Link>
               </div>
             );
           })}

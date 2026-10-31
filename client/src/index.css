@@ -237,6 +237,13 @@
   .qoo-hero-fallback {
     position: relative;
     overflow: hidden;
+    background: linear-gradient(135deg, #0f1c3f 0%, #1a2a5e 55%, #2d1b4e 100%);
+  }
+  .qoo-hero-berry {
+    background: linear-gradient(135deg, #4b153f 0%, #8e285d 55%, #e35c6f 100%);
+  }
+  .qoo-hero-teal {
+    background: linear-gradient(135deg, #083b4a 0%, #087f8c 55%, #43c6ac 100%);
   }
   .qoo-hero-fallback::before {
     content: "";
@@ -252,6 +259,10 @@
   .qoo-hero-fallback .qoo-hero-badge {
     @apply inline-block bg-white rounded-full px-3 py-1 text-xs font-bold shadow-sm;
     color: #1a2a5e;
+  }
+  .qoo-hero-cta {
+    @apply inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-xs md:text-sm font-bold shadow-sm;
+    color: #172554;
   }
 
   /* Real product photo composited into the dark hero; multiply drops its white studio background */
