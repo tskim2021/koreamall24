@@ -1,0 +1,1 @@
+DROP TABLE `product_related_products`;

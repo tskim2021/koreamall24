@@ -1,0 +1,1 @@
+ALTER TABLE `inquiry_comments` ADD `feedbackRating` varchar(16);

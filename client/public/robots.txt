@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://cocokusuri.com/sitemap.xml
+Sitemap: https://www.cocokusuri.com/sitemap.xml

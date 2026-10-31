@@ -1,0 +1,2 @@
+ALTER TABLE `paymentSettings` MODIFY COLUMN `provider` enum('stripe','airwallex','2checkout','payoneer','bank_transfer','cookiepay') NOT NULL;--> statement-breakpoint
+ALTER TABLE `payments` MODIFY COLUMN `provider` enum('stripe','airwallex','2checkout','payoneer','bank_transfer','cookiepay') NOT NULL;

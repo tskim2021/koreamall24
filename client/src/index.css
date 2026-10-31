@@ -1,0 +1,674 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Custom breakpoints */
+  --breakpoint-2xl: 1536px; /* Tailwind default 2xl = 1536px, keep as-is */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  /* Qoo10-style vibrant blue/indigo primary */
+  --primary: oklch(0.52 0.21 264);
+  --primary-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.52 0.21 264);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --chart-1: oklch(0.65 0.18 15);
+  --chart-2: oklch(0.55 0.22 15);
+  --chart-3: oklch(0.45 0.2 15);
+  --chart-4: oklch(0.65 0.18 45);
+  --chart-5: oklch(0.55 0.18 145);
+  --radius: 0.375rem;
+  --background: oklch(0.965 0.002 247);
+  --foreground: oklch(0.15 0.02 30);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 30);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 30);
+  --secondary: oklch(0.96 0.02 90);
+  --secondary-foreground: oklch(0.25 0.02 30);
+  --muted: oklch(0.95 0.01 90);
+  --muted-foreground: oklch(0.45 0.02 30);
+  --accent: oklch(0.65 0.18 45);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.88 0.02 90);
+  --input: oklch(0.88 0.02 90);
+  --ring: oklch(0.52 0.21 264);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.15 0.02 30);
+  --sidebar-accent: oklch(0.96 0.02 90);
+  --sidebar-accent-foreground: oklch(0.15 0.02 30);
+  --sidebar-border: oklch(0.88 0.02 90);
+  --sidebar-ring: oklch(0.52 0.21 264);
+  
+  /* Custom sale colors */
+  --sale: oklch(0.55 0.22 15);
+  --sale-bg: oklch(0.95 0.05 15);
+  --time-sale: oklch(0.6 0.2 45);
+  --monthly-sale: oklch(0.55 0.18 145);
+}
+
+.dark {
+  --primary: var(--color-blue-700);
+  --primary-foreground: var(--color-blue-50);
+  --sidebar-primary: var(--color-blue-500);
+  --sidebar-primary-foreground: var(--color-blue-50);
+  --background: oklch(0.141 0.005 285.823);
+  --foreground: oklch(0.85 0.005 65);
+  --card: oklch(0.21 0.006 285.885);
+  --card-foreground: oklch(0.85 0.005 65);
+  --popover: oklch(0.21 0.006 285.885);
+  --popover-foreground: oklch(0.85 0.005 65);
+  --secondary: oklch(0.24 0.006 286.033);
+  --secondary-foreground: oklch(0.7 0.005 65);
+  --muted: oklch(0.274 0.006 286.033);
+  --muted-foreground: oklch(0.705 0.015 286.067);
+  --accent: oklch(0.274 0.006 286.033);
+  --accent-foreground:  oklch(0.92 0.005 65);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.488 0.243 264.376);
+  --chart-1: var(--color-blue-300);
+  --chart-2: var(--color-blue-500);
+  --chart-3: var(--color-blue-600);
+  --chart-4: var(--color-blue-700);
+  --chart-5: var(--color-blue-800);
+  --sidebar: oklch(0.21 0.006 285.885);
+  --sidebar-foreground: oklch(0.85 0.005 65);
+  --sidebar-accent: oklch(0.274 0.006 286.033);
+  --sidebar-accent-foreground:  oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.488 0.243 264.376);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    font-feature-settings: "palt";
+  }
+  /* Prevent layout shift when dialog opens/closes */
+  body[style*="overflow: hidden"] {
+    scrollbar-gutter: stable;
+  }
+  /* Ensure dialog portal is always properly positioned */
+  [data-slot="dialog-portal"] {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+  }
+  [data-slot="dialog-portal"] > * {
+    pointer-events: auto;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@utility container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @media (max-width: 639px) {
+    max-width: 480px;
+  }
+
+  @media (min-width: 640px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    max-width: 1160px;
+  }
+
+  @media (min-width: 1280px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    max-width: 1160px;
+  }
+
+  @media (min-width: 1500px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    max-width: 1160px;
+  }
+}
+
+@layer base {
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+}
+
+/* Japanese-style component utilities */
+@layer components {
+  .jp-card {
+    @apply bg-white rounded-md;
+  }
+
+  /* Qoo10-style colorful gradient logo text */
+  .qoo-logo-text {
+    background: linear-gradient(90deg, #ff3d5a 0%, #ff7a3d 35%, #a24bff 70%, #4b6bff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  /* Qoo10-style bold category nav bar */
+  .qoo-nav-bar {
+    @apply bg-primary text-white;
+  }
+
+  /* Qoo10-style accent pill (e.g. the pink "MOVE" tab) */
+  .qoo-accent-pill {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-white font-bold whitespace-nowrap;
+    font-size: 12px;
+    background: linear-gradient(90deg, #ff2f6e 0%, #ff5f6e 100%);
+    box-shadow: 0 1px 4px rgba(255, 47, 110, 0.5);
+  }
+
+  /* Qoo10-style rich gradient hero fallback (no image banners) */
+  .qoo-hero-fallback {
+    position: relative;
+    overflow: hidden;
+  }
+  .qoo-hero-fallback::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 15% 30%, rgba(255,255,255,0.35) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(255,255,255,0.25) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .qoo-hero-fallback .qoo-hero-title {
+    text-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  }
+  .qoo-hero-fallback .qoo-hero-badge {
+    @apply inline-block bg-white rounded-full px-3 py-1 text-xs font-bold shadow-sm;
+    color: #1a2a5e;
+  }
+
+  /* Real product photo composited into the dark hero; multiply drops its white studio background */
+  .qoo-hero-product-img {
+    mix-blend-mode: multiply;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+  }
+  @media (max-width: 639px) {
+    .qoo-hero-product-img { display: none; }
+    .qoo-hero-burst { display: none; }
+  }
+
+  /* Radiating light burst behind the hero product photo, qoo10-style */
+  .qoo-hero-burst {
+    border-radius: 50%;
+    pointer-events: none;
+    background:
+      radial-gradient(circle, rgba(255,111,180,0.4) 0%, rgba(255,111,180,0.15) 32%, transparent 62%),
+      repeating-conic-gradient(from 0deg, rgba(255,255,255,0.14) 0deg 5deg, transparent 5deg 17deg);
+    animation: qoo-hero-burst-spin 40s linear infinite;
+  }
+  @keyframes qoo-hero-burst-spin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  .jp-section-title {
+    @apply text-lg font-bold text-foreground border-l-4 border-primary pl-3 mb-4;
+  }
+  
+  .jp-badge {
+    @apply inline-flex items-center px-2 py-0.5 text-xs font-medium rounded;
+  }
+  
+  .jp-badge-sale {
+    @apply bg-primary text-white;
+  }
+  
+  .jp-badge-popular {
+    @apply bg-accent text-white;
+  }
+  
+  .jp-badge-new {
+    @apply bg-green-500 text-white;
+  }
+  
+  .jp-price {
+    @apply text-primary font-bold;
+  }
+  
+  .jp-price-original {
+    @apply text-muted-foreground line-through text-sm;
+  }
+  
+  .jp-product-grid {
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2;
+  }
+  
+  .jp-category-nav {
+    @apply flex flex-wrap gap-1 text-sm;
+  }
+  
+  .jp-category-item {
+    @apply px-3 py-1.5 bg-secondary hover:bg-primary hover:text-white rounded transition-colors cursor-pointer text-sm;
+  }
+  
+  .jp-rank {
+    @apply absolute top-1 left-1 w-6 h-6 flex items-center justify-center text-xs font-bold rounded z-20;
+  }
+  
+  .jp-rank-1 {
+    @apply bg-yellow-400 text-yellow-900;
+  }
+  
+  .jp-rank-2 {
+    @apply bg-gray-300 text-gray-700;
+  }
+  
+  .jp-rank-3 {
+    @apply bg-amber-600 text-white;
+  }
+  
+  .jp-rank-default {
+    @apply bg-gray-100 text-gray-600;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Animation for sale items */
+@keyframes pulse-sale {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.animate-sale {
+  animation: pulse-sale 2s ease-in-out infinite;
+}
+/* Legal HTML Content Styles */
+.legal-html-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid hsl(var(--primary));
+  color: hsl(var(--foreground));
+}
+
+.legal-html-content h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: hsl(var(--foreground));
+}
+
+.legal-html-content p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+  color: hsl(var(--foreground));
+}
+
+.legal-html-content ul,
+.legal-html-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.legal-html-content ul {
+  list-style-type: disc;
+}
+
+.legal-html-content ol {
+  list-style-type: decimal;
+}
+
+.legal-html-content li {
+  margin-bottom: 0.375rem;
+  line-height: 1.75;
+  color: hsl(var(--foreground));
+}
+
+.legal-html-content dl {
+  margin-bottom: 1rem;
+}
+
+.legal-html-content dt {
+  font-weight: 600;
+  margin-top: 1rem;
+  color: hsl(var(--foreground));
+}
+
+.legal-html-content dd {
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.legal-html-content a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+}
+
+.legal-html-content a:hover {
+  opacity: 0.8;
+}
+
+.legal-html-content table.legal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.legal-html-content table.legal-table th,
+.legal-html-content table.legal-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid hsl(var(--border));
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.legal-html-content table.legal-table th {
+  background-color: hsl(var(--muted));
+  font-weight: 600;
+  width: 30%;
+  white-space: nowrap;
+  color: hsl(var(--foreground));
+}
+
+.legal-html-content table.legal-table td {
+  color: hsl(var(--foreground));
+}
+
+.legal-html-content .notice-box {
+  background-color: hsl(var(--destructive) / 0.08);
+  border: 1px solid hsl(var(--destructive) / 0.3);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.legal-html-content .notice-box strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: hsl(var(--destructive));
+}
+
+.legal-html-content .updated-at {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid hsl(var(--border));
+  font-size: 0.85rem;
+  color: hsl(var(--muted-foreground));
+}
+
+
+/* Product Content (商品説明) Prose Styles */
+.product-content {
+  font-size: 0.9375rem;
+  line-height: 1.85;
+  color: var(--foreground);
+}
+
+.product-content h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 4px solid oklch(0.55 0.22 15);
+  color: oklch(0.15 0.02 30);
+}
+
+.product-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: oklch(0.2 0.02 30);
+}
+
+.product-content p {
+  margin-bottom: 0.875rem;
+}
+
+.product-content ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 0.875rem;
+}
+
+.product-content ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 0.875rem;
+}
+
+.product-content li {
+  margin-bottom: 0.3rem;
+  line-height: 1.75;
+}
+
+.product-content strong {
+  font-weight: 700;
+  color: oklch(0.15 0.02 30);
+}
+
+.product-content em {
+  font-style: italic;
+  color: oklch(0.35 0.05 30);
+}
+
+.product-content a {
+  color: oklch(0.55 0.22 15);
+  text-decoration: underline;
+}
+
+.product-content a:hover {
+  opacity: 0.8;
+}
+
+/* Swiper Popular Ranking Styles */
+.popular-ranking-swiper {
+  @apply w-full;
+}
+
+.popular-ranking-swiper .swiper-slide {
+  @apply h-auto;
+}
+
+.swiper-pagination-custom {
+  @apply flex justify-center gap-2 mt-4;
+}
+
+.swiper-pagination-custom .swiper-pagination-bullet {
+  @apply w-2 h-2 bg-gray-300 rounded-full cursor-pointer;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.swiper-pagination-custom .swiper-pagination-bullet-active {
+  @apply bg-primary;
+  width: 28px;
+  border-radius: 9999px;
+}
+
+.swiper-button-prev-custom,
+.swiper-button-next-custom {
+  @apply absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:shadow transition-shadow cursor-pointer;
+}
+
+.swiper-button-prev-custom {
+  @apply left-0 -translate-x-12;
+}
+
+.swiper-button-next-custom {
+  @apply right-0 translate-x-12;
+}
+
+.swiper-button-prev-custom:after,
+.swiper-button-next-custom:after {
+  content: none;
+}
+
+/* Recommended products swiper pagination */
+.rec-swiper {
+  width: 100%;
+  cursor: grab;
+}
+
+.rec-swiper:active {
+  cursor: grabbing;
+}
+
+.rec-swiper .swiper-slide {
+  height: auto;
+}
+
+.rec-swiper-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.rec-swiper-pagination .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #d1d5db;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease;
+  opacity: 1;
+}
+
+.rec-swiper-pagination .swiper-pagination-bullet-active {
+  background: #db2777;
+  width: 32px;
+  border-radius: 9999px;
+  transform: none;
+}
+
+
+/* ─── 관리자 페이지 폰트 사이즈 14px 통일 ─────────────────────────────── */
+/* AdminLayout 최상위 div에 fontSize:14px 인라인 스타일이 적용되어 있음.
+   하위 요소들이 font-size를 명시적으로 지정하지 않으면 14px를 상속.
+   단, Tailwind text-* 클래스는 rem 기반이므로 아래에서 관리자 영역 내
+   text-base(1rem)가 14px가 되도록 html font-size를 재정의하지 않고
+   대신 .admin-root 클래스를 통해 제어 */
+.admin-root {
+  font-size: 13px;
+}
+.admin-root p,
+.admin-root span:not(.lucide),
+.admin-root label,
+.admin-root td,
+.admin-root th,
+.admin-root li,
+.admin-root input,
+.admin-root textarea,
+.admin-root select,
+.admin-root button {
+  font-size: 13px;
+}
+
+/* ─── 스크롤바 숨김 유틸리티 ─────────────────────────────── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* 드래그 스크롤 영역 webkit 스크롤바 숨김 */
+.drag-scroll-area {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.drag-scroll-area::-webkit-scrollbar {
+  display: none;
+}

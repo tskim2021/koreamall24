@@ -1,0 +1,1 @@
+ALTER TABLE `products` ADD `couponExcluded` boolean DEFAULT false NOT NULL;

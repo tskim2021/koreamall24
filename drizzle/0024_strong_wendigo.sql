@@ -1,0 +1,1 @@
+ALTER TABLE `banners` ADD `bannerType` varchar(50) DEFAULT 'main' NOT NULL;

@@ -1,0 +1,1 @@
+ALTER TABLE `products` ADD `isVisible` boolean DEFAULT true NOT NULL;

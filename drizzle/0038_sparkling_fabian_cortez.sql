@@ -1,0 +1,2 @@
+ALTER TABLE `announcements` ADD `category` enum('notice','important','sale','maintenance','event') DEFAULT 'notice' NOT NULL;--> statement-breakpoint
+ALTER TABLE `announcements` ADD `expiresAt` timestamp;

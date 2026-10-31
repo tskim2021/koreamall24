@@ -1,0 +1,1 @@
+ALTER TABLE `recommendationEvents` MODIFY COLUMN `recommendationType` enum('tag_based','collaborative','category_based','after_review') NOT NULL;

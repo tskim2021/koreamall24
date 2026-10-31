@@ -1,0 +1,63 @@
+    adminGetAll: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user?.role !== "admin") {
+        throw new TRPCError({ code: "FORBIDDEN", message: "管理者のみアクセス可能です。" });
+      }
+      return await getAllInquiries();
+    }),
+    adminCreate: protectedProcedure
+      .input(z.object({
+        titleJa: z.string().min(1).max(255),
+        contentJa: z.string().min(1),
+        isActive: z.boolean().default(true),
+        sortOrder: z.number().default(0),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user?.role !== "admin") {
+          throw new TRPCError({ code: "FORBIDDEN", message: "管理者のみアクセス可能です。" });
+        }
+        const db = await getDb();
+        const result = await db.insert(inquiries).values({
+          titleJa: input.titleJa,
+          contentJa: input.contentJa,
+          isActive: input.isActive,
+          sortOrder: input.sortOrder,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        }).returning();
+        return result[0];
+      }),
+    adminUpdate: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        titleJa: z.string().min(1).max(255),
+        contentJa: z.string().min(1),
+        isActive: z.boolean(),
+        sortOrder: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user?.role !== "admin") {
+          throw new TRPCError({ code: "FORBIDDEN", message: "管理者のみアクセス可能です。" });
+        }
+        const db = await getDb();
+        const result = await db.update(inquiries)
+          .set({
+            titleJa: input.titleJa,
+            contentJa: input.contentJa,
+            isActive: input.isActive,
+            sortOrder: input.sortOrder,
+            updatedAt: new Date(),
+          })
+          .where(eq(inquiries.id, input.id))
+          .returning();
+        return result[0];
+      }),
+    adminDelete: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user?.role !== "admin") {
+          throw new TRPCError({ code: "FORBIDDEN", message: "管理者のみアクセス可能です。" });
+        }
+        const db = await getDb();
+        await db.delete(inquiries).where(eq(inquiries.id, input.id));
+        return { success: true };
+      }),

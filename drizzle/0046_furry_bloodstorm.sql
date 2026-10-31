@@ -1,0 +1,1 @@
+ALTER TABLE `shipment_tracking_cache` MODIFY COLUMN `events_json` text;

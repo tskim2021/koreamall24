@@ -1,0 +1,8 @@
+title = "koreamall24 secret scanning"
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "GA4 setting identifier and explicit dummy masking-test fixture"
+regexTarget = "secret"
+regexes = ['^GA4_MEASUREMENT_ID$', '^xkeysib-testkey123456789$']

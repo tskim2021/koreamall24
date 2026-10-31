@@ -1,0 +1,1 @@
+ALTER TABLE `payments` MODIFY COLUMN `provider` enum('stripe','airwallex','2checkout','payoneer','paypal','bank_transfer','cookiepay') NOT NULL;

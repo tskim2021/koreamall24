@@ -1,0 +1,1 @@
+ALTER TABLE `announcements` ADD `isExpanded` boolean DEFAULT false NOT NULL;

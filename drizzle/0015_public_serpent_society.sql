@@ -1,0 +1,1 @@
+ALTER TABLE `registered_users` ADD `nickname` varchar(50);
