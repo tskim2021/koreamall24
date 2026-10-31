@@ -20,7 +20,7 @@ import {
   Leaf,
 } from "lucide-react";
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+const iconMap: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
   Scissors,
   Sparkles,
   Scale,
@@ -160,14 +160,14 @@ export default function CategoryGrid({ sidebarMode = false }: CategoryGridProps)
           <Link href="/ranking" className="text-xs md:text-sm text-primary hover:underline shrink-0">もっと見る</Link>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-2 md:gap-3">
-          {categories?.map((category) => {
+          {categories?.map((category, index) => {
             const style = getCategoryStyle(category.nameJa);
             const Icon = iconMap[style.icon] || Heart;
             return (
               <Link key={category.id} href={`/category/${category.slug}`}>
                 <div className={`jp-card p-1.5 md:p-3 text-center border transition-colors group ${style.borderColor} ${style.hoverBg}`}>
-                  <div className={`w-8 md:w-12 h-8 md:h-12 mx-auto mb-1 md:mb-2 rounded-full ${style.bgColor} flex items-center justify-center group-hover:shadow-md transition-all`}>
-                    <Icon className={`w-4 md:w-6 h-4 md:h-6 ${style.textColor}`} />
+                  <div className={`qoo-category-icon qoo-category-icon-${index % 4} w-8 md:w-12 h-8 md:h-12 mx-auto mb-1 md:mb-2 rounded-full flex items-center justify-center group-hover:-translate-y-0.5 transition-transform`}>
+                    <Icon className={`qoo-category-glyph w-4 md:w-6 h-4 md:h-6 ${style.textColor}`} strokeWidth={2.4} />
                   </div>
                   <p className="text-xs font-medium truncate line-clamp-2">{category.nameJa}</p>
                 </div>

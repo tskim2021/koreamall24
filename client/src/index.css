@@ -233,6 +233,43 @@
     box-shadow: 0 1px 4px rgba(255, 47, 110, 0.5);
   }
 
+  /* Neat, raised icon treatment shared by the category and quick-link cards. */
+  .qoo-category-icon,
+  .qoo-quick-icon {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+      inset 2px 2px 4px rgba(255, 255, 255, 0.95),
+      inset -3px -4px 7px rgba(75, 96, 130, 0.16),
+      0 5px 0 rgba(50, 70, 105, 0.1),
+      0 8px 14px rgba(40, 58, 92, 0.12);
+  }
+  .qoo-category-icon::before,
+  .qoo-quick-icon::before {
+    content: "";
+    position: absolute;
+    inset: 2px 20% 52% 12%;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0));
+    pointer-events: none;
+    z-index: 0;
+  }
+  .qoo-category-icon-0 { background: linear-gradient(145deg, #f7fbff, #d9e8ff); }
+  .qoo-category-icon-1 { background: linear-gradient(145deg, #fff8f1, #ffe1cf); }
+  .qoo-category-icon-2 { background: linear-gradient(145deg, #f4fff9, #d4f5e6); }
+  .qoo-category-icon-3 { background: linear-gradient(145deg, #fbf6ff, #e8dcff); }
+  .qoo-category-glyph {
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 2px 1px rgba(45, 63, 95, 0.2));
+  }
+  .qoo-quick-icon-red { background: linear-gradient(145deg, #fff1f1, #ffd8dc); color: #f43f5e; }
+  .qoo-quick-icon-green { background: linear-gradient(145deg, #effff6, #c9f5dc); color: #10b981; }
+  .qoo-quick-icon-yellow { background: linear-gradient(145deg, #fffced, #ffedab); color: #d99a00; }
+  .qoo-quick-icon-purple { background: linear-gradient(145deg, #fbf4ff, #ead9ff); color: #a855f7; }
+  .qoo-quick-glyph { position: relative; z-index: 1; color: currentColor; filter: drop-shadow(0 2px 1px rgba(75, 54, 112, 0.22)); }
+
   /* Qoo10-style rich gradient hero fallback (no image banners) */
   .qoo-hero-fallback {
     position: relative;

@@ -175,8 +175,8 @@ export default function Home() {
           <div className="container">
             <div className="grid grid-cols-4 gap-1.5 md:gap-2">
               <a href="/ranking" className="jp-card p-2 md:p-3 flex flex-col md:flex-row items-center gap-1 md:gap-3 hover:border-primary/50 transition-colors text-center md:text-left">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-red-100 flex items-center justify-center shrink-0">
-                  <Flame className="w-4 h-4 md:w-5 md:h-5 text-red-500" />
+                <div className="qoo-quick-icon qoo-quick-icon-red w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0">
+                  <Flame className="qoo-quick-glyph w-4 h-4 md:w-5 md:h-5" strokeWidth={2.5} />
                 </div>
                 <div>
                   <p className="font-medium text-xs md:text-sm">ヒット商品</p>
@@ -184,8 +184,8 @@ export default function Home() {
                 </div>
               </a>
               <a href="/new-arrivals" className="jp-card p-2 md:p-3 flex flex-col md:flex-row items-center gap-1 md:gap-3 hover:border-primary/50 transition-colors text-center md:text-left">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-green-100 flex items-center justify-center shrink-0">
-                  <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-green-500" />
+                <div className="qoo-quick-icon qoo-quick-icon-green w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0">
+                  <Sparkles className="qoo-quick-glyph w-4 h-4 md:w-5 md:h-5" strokeWidth={2.5} />
                 </div>
                 <div>
                   <p className="font-medium text-xs md:text-sm">新着商品</p>
@@ -193,8 +193,8 @@ export default function Home() {
                 </div>
               </a>
               <a href="/recommended" className="jp-card p-2 md:p-3 flex flex-col md:flex-row items-center gap-1 md:gap-3 hover:border-primary/50 transition-colors text-center md:text-left">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-yellow-100 flex items-center justify-center shrink-0">
-                  <ThumbsUp className="w-4 h-4 md:w-5 md:h-5 text-yellow-600" />
+                <div className="qoo-quick-icon qoo-quick-icon-yellow w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0">
+                  <ThumbsUp className="qoo-quick-glyph w-4 h-4 md:w-5 md:h-5" strokeWidth={2.5} />
                 </div>
                 <div>
                   <p className="font-medium text-xs md:text-sm">おすすめ商品</p>
@@ -202,8 +202,8 @@ export default function Home() {
                 </div>
               </a>
               <a href="/sale" className="jp-card p-2 md:p-3 flex flex-col md:flex-row items-center gap-1 md:gap-3 hover:border-primary/50 transition-colors text-center md:text-left">
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
-                  <Tag className="w-4 h-4 md:w-5 md:h-5 text-purple-500" />
+                <div className="qoo-quick-icon qoo-quick-icon-purple w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0">
+                  <Tag className="qoo-quick-glyph w-4 h-4 md:w-5 md:h-5" strokeWidth={2.5} />
                 </div>
                 <div>
                   <p className="font-medium text-xs md:text-sm">セール商品</p>
