@@ -159,7 +159,7 @@ export default function CategoryGrid({ sidebarMode = false }: CategoryGridProps)
           <h2 className="jp-section-title text-base md:text-lg !mb-0">カテゴリーから探す</h2>
           <Link href="/ranking" className="text-xs md:text-sm text-primary hover:underline shrink-0">もっと見る</Link>
         </div>
-        <div className="grid grid-cols-4 md:grid-cols-8 gap-1 md:gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-2 md:gap-3">
           {categories?.map((category) => {
             const style = getCategoryStyle(category.nameJa);
             const Icon = iconMap[style.icon] || Heart;
