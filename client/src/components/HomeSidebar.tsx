@@ -6,13 +6,14 @@ import { ArrowRight, Bell, Flame, Sparkles, Tag } from "lucide-react";
 interface HomeSidebarProps {
   compact?: boolean; // true: 카테고리 페이지 - 카테고리 목록 + 상단배너만 표시
   hideTopBanner?: boolean; // true: 상단배너를 별도 칼럼에서 렌더링하므로 여기서는 생략 (qoo10 스타일 2칼럼 구성)
+  matchHeroHeight?: boolean; // 홈 첫 화면에서 오른쪽 배너와 같은 높이로 정렬
 }
 
 const _initialData = typeof window !== "undefined" ? (window as any).__INITIAL_DATA__ : undefined;
 const STALE_30MIN = { staleTime: 5 * 60 * 1000, gcTime: 10 * 60 * 1000 };
 const STALE_10MIN = { staleTime: 10 * 60 * 1000, gcTime: 15 * 60 * 1000 };
 
-export default function HomeSidebar({ compact = false, hideTopBanner = false }: HomeSidebarProps) {
+export default function HomeSidebar({ compact = false, hideTopBanner = false, matchHeroHeight = false }: HomeSidebarProps) {
   const { data: sidebarTopBanners = [], isLoading: sidebarTopLoading } = trpc.banner.listByType.useQuery(
     { bannerType: "sidebar_top" },
     STALE_30MIN
@@ -27,7 +28,7 @@ export default function HomeSidebar({ compact = false, hideTopBanner = false }: 
   );
 
   return (
-    <aside className="hidden lg:block w-[214px] xl:w-[236px] shrink-0 sticky top-4 h-full">
+    <aside className={`hidden lg:block w-[214px] xl:w-[236px] shrink-0 sticky top-4 ${matchHeroHeight ? "home-hero-sidebar" : "h-full"}`}>
       <div className={`${compact ? "rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden h-full" : ""}`}>
         {/* 사이드바 상단 배너 - DB 연동 (로딩 완료 후에만 표시) */}
         {!hideTopBanner && !sidebarTopLoading && sidebarTopBanners.length > 0 && (

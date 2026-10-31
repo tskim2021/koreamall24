@@ -126,14 +126,14 @@ export default function Home() {
         {/* 1. Banner Slider with category sidebar alongside it - qoo10 style */}
         <section className="py-3 md:py-4">
           <div className="container">
-            <div className="flex gap-3 items-stretch">
-              <HomeSidebar compact hideTopBanner />
-              <div className="flex-1 min-w-0 rounded-xl overflow-hidden shadow-sm">
+            <div className="home-hero-layout flex gap-3 items-stretch">
+              <HomeSidebar compact hideTopBanner matchHeroHeight />
+              <div className="home-hero-banner flex-1 min-w-0 rounded-xl overflow-hidden shadow-sm">
                 <BannerSlider
                   heroImages={[
-                    "/images/products/1724934784/7Iqk7YGs66aw7IO320240829211636.jpg",
-                    "/images/products/1725534082/7Iqk7YGs66aw7IO320240905200245.jpg",
-                    "/images/products/1725613889/7Iqk7YGs66aw7IO320240906175947.jpg",
+                    "/images/hero-cutouts/health-cream-cutout.png",
+                    "/images/hero-cutouts/benzac-cutout.png",
+                    "/images/hero-cutouts/tretiva-cutout.png",
                   ]}
                 />
               </div>

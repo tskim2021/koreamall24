@@ -106,6 +106,8 @@ export default function BannerSlider({ heroImages }: BannerSliderProps = {}) {
   return (
     <>
       <style>{`
+        .banner-slider-root { height: 100%; }
+        .banner-slider-root > .flex { height: 100%; }
         .banner-slider-root .banner-slide-inner { aspect-ratio: 16/9; }
         @media (max-width: 639px) {
           .banner-slider-root .banner-slide-inner {
@@ -125,6 +127,9 @@ export default function BannerSlider({ heroImages }: BannerSliderProps = {}) {
           }
         }
         @media (min-width: 640px) { .banner-slider-root .banner-slide-inner { aspect-ratio: 2/1; } }
+        @media (min-width: 1024px) {
+          .banner-slider-root .banner-slide-inner { height: 100%; aspect-ratio: auto; }
+        }
       `}</style>
       <div className="banner-slider-root relative w-full" style={{ overflow: "hidden" }}>
         {/* Slides */}
@@ -154,14 +159,12 @@ export default function BannerSlider({ heroImages }: BannerSliderProps = {}) {
               <div className={`banner-slide-inner qoo-hero-fallback qoo-hero-${banner.theme || "navy"} w-full`}>
                 {heroImages && heroImages.length > 0 && (
                   <div className="qoo-hero-art" aria-hidden="true">
-                    <div className="qoo-hero-art-card">
-                      <img
-                        src={heroImages[idx % heroImages.length]}
-                        alt=""
-                        className="qoo-hero-product-img"
-                        loading={idx === 0 ? "eager" : "lazy"}
-                      />
-                    </div>
+                    <img
+                      src={heroImages[idx % heroImages.length]}
+                      alt=""
+                      className="qoo-hero-product-img"
+                      loading={idx === 0 ? "eager" : "lazy"}
+                    />
                   </div>
                 )}
                 <div className="h-full flex items-center px-6 md:px-12 relative z-10">
