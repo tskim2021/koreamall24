@@ -11,6 +11,8 @@ import {
   Shield,
   PawPrint,
   Pill,
+  FlaskConical,
+  Sprout,
   Zap,
   Droplet,
   Flower2,
@@ -30,6 +32,8 @@ const iconMap: Record<string, React.ComponentType<{ className?: string; strokeWi
   Shield,
   PawPrint,
   Pill,
+  FlaskConical,
+  Sprout,
   Zap,
   Droplet,
   Flower2,
@@ -50,6 +54,16 @@ interface CategoryStyle {
 // 카테고리별 아이콘 및 색상 매핑
 const getCategoryStyle = (categoryName: string): CategoryStyle => {
   const name = categoryName.toLowerCase();
+
+  // Keep the primary homepage categories visually distinct and semantically clear.
+  if (name.includes("ビタミン"))
+    return { icon: "Pill", bgColor: "bg-blue-100", textColor: "text-blue-600", borderColor: "border-blue-300", hoverBg: "hover:bg-blue-200" };
+  if (name.includes("サプリメント"))
+    return { icon: "FlaskConical", bgColor: "bg-amber-100", textColor: "text-amber-600", borderColor: "border-amber-300", hoverBg: "hover:bg-amber-200" };
+  if (name.includes("乳酸菌") || name.includes("プロバイオ"))
+    return { icon: "Sprout", bgColor: "bg-emerald-100", textColor: "text-emerald-600", borderColor: "border-emerald-300", hoverBg: "hover:bg-emerald-200" };
+  if (name.includes("スリミング") || name.includes("インナービューティー"))
+    return { icon: "Scale", bgColor: "bg-violet-100", textColor: "text-violet-600", borderColor: "border-violet-300", hoverBg: "hover:bg-violet-200" };
   
   if (name.includes("美容") || name.includes("スキンケア") || name.includes("ニキビ")) 
     return { icon: "Sparkles", bgColor: "bg-pink-100", textColor: "text-pink-600", borderColor: "border-pink-300", hoverBg: "hover:bg-pink-200" };
