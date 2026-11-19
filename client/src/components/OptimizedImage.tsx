@@ -89,7 +89,7 @@ function OptimizedImageInner({
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(!lazy);
-  const [hasError, setHasError] = useState(false);
+  const [failedSources, setFailedSources] = useState<string[]>([]);
   const imgRef = useRef<HTMLDivElement>(null);
 
   // IntersectionObserver for lazy loading
@@ -116,38 +116,48 @@ function OptimizedImageInner({
     return () => observer.disconnect();
   }, [lazy, isInView]);
 
-  // Determine the best image URL based on size hint (with WebP proxy)
-  const getImageUrl = (): string | null => {
-    if (!src && !srcMedium && !srcThumb) return null;
+  // Build an ordered list of available variants. If a CDN/proxy URL fails,
+  // continue with the next variant instead of immediately showing the fallback.
+  const getImageCandidates = (): string[] => {
+    const ordered = (() => {
+      switch (size) {
+        case "thumb": return [srcThumb, srcMedium, src];
+        case "full": return [src, srcMedium, srcThumb];
+        case "medium":
+        default: return [srcMedium, src, srcThumb];
+      }
+    })();
 
-    switch (size) {
-      case "thumb": {
-        const raw = srcThumb || srcMedium || src || null;
-        return raw ? getOptimizedSrc(raw, 200, 75) : null;
-      }
-      case "medium": {
-        const raw = srcMedium || src || null;
-        return raw ? getOptimizedSrc(raw, 600, 80) : null;
-      }
-      case "full": {
-        const raw = src || srcMedium || null;
-        return raw ? getOptimizedSrc(raw, 0, 85) : null;
-      }
-      default: {
-        const raw = srcMedium || src || null;
-        return raw ? getOptimizedSrc(raw, 600, 80) : null;
-      }
-    }
+    return ordered
+      .filter((value): value is string => Boolean(value))
+      .map((value) => getOptimizedSrc(value, size === "thumb" ? 200 : size === "full" ? 0 : 600, size === "full" ? 85 : size === "thumb" ? 75 : 80))
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .filter((value) => !failedSources.includes(value));
   };
 
-  const imageUrl = getImageUrl();
+  const imageCandidates = getImageCandidates();
+  const imageUrl = imageCandidates[0] ?? null;
+
+  useEffect(() => {
+    setFailedSources([]);
+    setIsLoaded(false);
+  }, [src, srcMedium, srcThumb]);
 
   // Build srcSet for responsive loading (with WebP proxy)
   const buildSrcSet = (): string | undefined => {
     const parts: string[] = [];
-    if (srcThumb) parts.push(`${getOptimizedSrc(srcThumb, 200, 75)} 200w`);
-    if (srcMedium) parts.push(`${getOptimizedSrc(srcMedium, 600, 80)} 600w`);
-    if (src && src !== srcMedium) parts.push(`${getOptimizedSrc(src, 0, 85)} 1200w`);
+    if (srcThumb) {
+      const url = getOptimizedSrc(srcThumb, 200, 75);
+      if (!failedSources.includes(url)) parts.push(`${url} 200w`);
+    }
+    if (srcMedium) {
+      const url = getOptimizedSrc(srcMedium, 600, 80);
+      if (!failedSources.includes(url)) parts.push(`${url} 600w`);
+    }
+    if (src && src !== srcMedium) {
+      const url = getOptimizedSrc(src, 0, 85);
+      if (!failedSources.includes(url)) parts.push(`${url} 1200w`);
+    }
     return parts.length > 1 ? parts.join(", ") : undefined;
   };
 
@@ -166,7 +176,7 @@ function OptimizedImageInner({
     }
   };
 
-  if (!imageUrl || hasError) {
+  if (!imageUrl) {
     return (
       <div
         ref={imgRef}
@@ -218,7 +228,10 @@ function OptimizedImageInner({
           decoding={lazy ? "async" : "sync"}
           fetchPriority={fetchpriority}
           onLoad={() => setIsLoaded(true)}
-          onError={() => setHasError(true)}
+          onError={() => {
+            setFailedSources((current) => current.includes(imageUrl) ? current : [...current, imageUrl]);
+            setIsLoaded(false);
+          }}
           className={`relative z-10 transition-opacity duration-500 ${
             isLoaded ? "opacity-100" : "opacity-0"
           } ${className}`}

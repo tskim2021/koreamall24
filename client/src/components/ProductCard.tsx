@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Star, Heart } from "lucide-react";
+import { Star, Heart, Pill, Sparkles, Leaf, HeartPulse } from "lucide-react";
 import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
@@ -87,6 +87,16 @@ export default function ProductCard({ product, rank, categoryName, badgeType, sh
   // 표시용 할인 계산 (기존 변수명 유지)
   const discount = bestDiscount;
 
+  const fallbackIcon = (() => {
+    const label = `${categoryName ?? ""} ${(product as any).name ?? ""}`.toLowerCase();
+    if (label.includes("slim") || label.includes("다이어트") || label.includes("スリミング")) return <Sparkles className="h-9 w-9 text-violet-400" strokeWidth={1.6} />;
+    if (label.includes("probiotic") || label.includes("유산균") || label.includes("乳酸菌")) return <Leaf className="h-9 w-9 text-emerald-400" strokeWidth={1.6} />;
+    if (label.includes("vitamin") || label.includes("비타민") || label.includes("ビタミン")) return <HeartPulse className="h-9 w-9 text-rose-400" strokeWidth={1.6} />;
+    return <Pill className="h-9 w-9 text-blue-400" strokeWidth={1.6} />;
+  })();
+
+  const fallbackTitle = ((product as any).nameJa || (product as any).name || "상품 이미지").replace(/\s+/g, " ").trim();
+
   const getRankClass = (rank: number) => {
     switch (rank) {
       case 1: return "jp-rank-1";
@@ -124,6 +134,14 @@ export default function ProductCard({ product, rank, categoryName, badgeType, sh
             size="medium"
             className="w-full h-full object-contain group-hover:scale-105 transition-transform"
             containerClassName="w-full h-full"
+            fallback={
+              <div className="flex h-full w-full flex-col items-center justify-center gap-3 rounded-lg bg-gradient-to-br from-slate-50 via-white to-blue-50 px-4 text-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-100">
+                  {fallbackIcon}
+                </div>
+                <span className="line-clamp-2 text-xs font-medium leading-5 text-slate-500">{fallbackTitle}</span>
+              </div>
+            }
           />
           </div>
 
