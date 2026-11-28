@@ -146,13 +146,13 @@ export default function MyPage() {
 
   const handleShareLine = () => {
     if (!referralLink) return;
-    const msg = encodeURIComponent(`ココくすりで日本の医薬品・健康商品をお得に購入しませんか？\n招待リンクから登録すると特典ポイントがもらえます！`);
+    const msg = encodeURIComponent(`koreamall24で日本の医薬品・健康商品をお得に購入しませんか？\n招待リンクから登録すると特典ポイントがもらえます！`);
     window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(referralLink)}&text=${msg}`, "_blank", "noopener,noreferrer");
   };
 
   const handleShareTwitter = () => {
     if (!referralLink) return;
-    const text = encodeURIComponent(`ココくすりで日本の医薬品・健康商品をお得に購入しませんか？招待リンクから登録すると特典ポイントがもらえます！ ${referralLink}`);
+    const text = encodeURIComponent(`koreamall24で日本の医薬品・健康商品をお得に購入しませんか？招待リンクから登録すると特典ポイントがもらえます！ ${referralLink}`);
     window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank", "noopener,noreferrer");
   };
 
@@ -160,7 +160,7 @@ export default function MyPage() {
     if (!referralLink) return;
     if (!navigator.share) { handleCopyLink(); return; }
     try {
-      await navigator.share({ title: "ココくすり招待", text: `紹介コード「${referralCode}」を使って登録すると特典ポイントがもらえます！`, url: referralLink });
+      await navigator.share({ title: "koreamall24招待", text: `紹介コード「${referralCode}」を使って登録すると特典ポイントがもらえます！`, url: referralLink });
     } catch {}
   };
 

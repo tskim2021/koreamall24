@@ -7,7 +7,7 @@ import { createServer as createViteServer } from "vite";
 import { getSiteSetting } from "../db";
 import { withCache, TTL_30MIN, TTL_10MIN } from "../cache";
 
-const BASE_URL = "https://cocokusuri.com";
+const BASE_URL = "https://koreamall24.com";
 
 /** HTML 특수문자 이스케이프 (메타태그 인젝션 방지) */
 function escHtml(str: string): string {
@@ -71,10 +71,10 @@ async function injectPageMeta(html: string, url: string): Promise<string> {
       const product = rawProduct ? await mergeProductThumbnail(rawProduct) : null;
       if (product) {
         const productImage = (product as any).seoImage || product.imageUrl || defaultOgImage;
-        const productTitle = `${product.nameJa} | Coco Kusuri`;
+        const productTitle = `${product.nameJa} | koreamall24`;
         const productDesc = (product as any).descriptionJa
           ? String((product as any).descriptionJa).replace(/<[^>]*>/g, '').slice(0, 160)
-          : `${product.nameJa}の詳細ページ。Coco Kusuriで日本医薬品・健康商品を個人輸入。`;
+          : `${product.nameJa}の詳細ページ。koreamall24で医薬品・健康商品を個人輸入。`;
         const productUrl = `${BASE_URL}/product/${productId}`;
         const productPrice = (product as any).price || (product as any).basePrice || 0;
         const jsonLd = [
@@ -85,14 +85,14 @@ async function injectPageMeta(html: string, url: string): Promise<string> {
             "description": productDesc,
             "image": productImage,
             "url": productUrl,
-            "brand": { "@type": "Brand", "name": "Coco Kusuri" },
+            "brand": { "@type": "Brand", "name": "koreamall24" },
             "offers": {
               "@type": "Offer",
               "priceCurrency": "JPY",
               "price": productPrice,
               "availability": "https://schema.org/InStock",
               "url": productUrl,
-              "seller": { "@type": "Organization", "name": "Coco Kusuri" }
+              "seller": { "@type": "Organization", "name": "koreamall24" }
             }
           },
           {
@@ -117,8 +117,8 @@ async function injectPageMeta(html: string, url: string): Promise<string> {
       const { getCategoryBySlug } = await import('../db');
       const category = await getCategoryBySlug(slug);
       if (category) {
-        const catTitle = `${category.nameJa} | Coco Kusuri`;
-        const catDesc = `${category.nameJa}の商品一覧。Coco Kusuriで日本医薬品・健康商品を個人輸入。正規品保証・送料無料・24時間対応。`;
+        const catTitle = `${category.nameJa} | koreamall24`;
+        const catDesc = `${category.nameJa}の商品一覧。koreamall24で医薬品・健康商品を個人輸入。正規品保証・送料無料・24時間対応。`;
         const catUrl = `${BASE_URL}/category/${slug}`;
         const jsonLd = [
           {
@@ -144,52 +144,52 @@ async function injectPageMeta(html: string, url: string): Promise<string> {
     // ── 정적 페이지별 메타태그 ─────────────────────────────────────────────
     const staticMeta: Record<string, { title: string; description: string; jsonLdType?: string }> = {
       '/': {
-        title: 'Coco Kusuri｜医薬品・健康商品の個人輸入代行サイト',
+        title: 'koreamall24｜医薬品・健康商品の個人輸入代行サイト',
         description: '医薬品・健康商品の個人輸入代行サービス。正規品保証・送料無料・24時間対応。AGA・育毛、ダイエット、美容・スキンケア、ピル・避妊薬、感染症対策など幅広い商品を取り揃えています。',
       },
       '/products': {
-        title: '商品一覧 | Coco Kusuri',
+        title: '商品一覧 | koreamall24',
         description: '日本医薬品・健康商品の個人輸入代行。AGA・育毛、ダイエット、美容・スキンケア、ピル・避妊薬、感染症対策など幅広い商品を取り揃えています。',
       },
       '/ranking': {
-        title: '売れ筋ランキングTOP100 | Coco Kusuri',
-        description: 'Coco Kusuriで最も売れている医薬品・健康商品のランキング。人気商品TOP100を随時更新中。',
+        title: '売れ筋ランキングTOP100 | koreamall24',
+        description: 'koreamall24で最も売れている医薬品・健康商品のランキング。人気商品TOP100を随時更新中。',
       },
       '/sale': {
-        title: 'セール商品 | Coco Kusuri',
-        description: 'Coco Kusuriのセール・割引商品一覧。お得な価格で日本医薬品・健康商品を個人輸入。',
+        title: 'セール商品 | koreamall24',
+        description: 'koreamall24のセール・割引商品一覧。お得な価格で医薬品・健康商品を個人輸入。',
       },
       '/new': {
-        title: '新着商品 | Coco Kusuri',
-        description: 'Coco Kusuriの新着商品一覧。最新の日本医薬品・健康商品を随時入荷中。',
+        title: '新着商品 | koreamall24',
+        description: 'koreamall24の新着商品一覧。最新の医薬品・健康商品を随時入荷中。',
       },
       '/bbs/notice': {
-        title: 'お知らせ | Coco Kusuri',
-        description: 'Coco Kusuriからのお知らせ・公告事項一覧。',
+        title: 'お知らせ | koreamall24',
+        description: 'koreamall24からのお知らせ・公告事項一覧。',
       },
       '/bbs/event': {
-        title: 'イベント・キャンペーン | Coco Kusuri',
-        description: 'Coco Kusuriのイベント・キャンペーン情報。お得なセール情報をいち早くお届けします。',
+        title: 'イベント・キャンペーン | koreamall24',
+        description: 'koreamall24のイベント・キャンペーン情報。お得なセール情報をいち早くお届けします。',
       },
       '/first-time-customer': {
-        title: 'はじめてのお客様へ | Coco Kusuri',
-        description: 'Coco Kusuriをはじめてご利用の方へ。ご注文方法・支払い・配送・個人輸入についてご説明します。',
+        title: 'はじめてのお客様へ | koreamall24',
+        description: 'koreamall24をはじめてご利用の方へ。ご注文方法・支払い・配送・個人輸入についてご説明します。',
       },
       '/terms-of-service': {
-        title: '利用規約 | Coco Kusuri',
-        description: 'Coco Kusuri利用規約。サービス利用に関する規約をご確認ください。',
+        title: '利用規約 | koreamall24',
+        description: 'koreamall24利用規約。サービス利用に関する規約をご確認ください。',
       },
       '/privacy-policy': {
-        title: 'プライバシーポリシー | Coco Kusuri',
-        description: 'Coco Kusuriプライバシーポリシー。個人情報の取り扱いについてご確認ください。',
+        title: 'プライバシーポリシー | koreamall24',
+        description: 'koreamall24プライバシーポリシー。個人情報の取り扱いについてご確認ください。',
       },
       '/legal-notice': {
-        title: '特定商取引法に基づく表記 | Coco Kusuri',
-        description: 'Coco Kusuri特定商取引法に基づく表記。販売業者・連絡先・返品ポリシーなどをご確認ください。',
+        title: '特定商取引法に基づく表記 | koreamall24',
+        description: 'koreamall24特定商取引法に基づく表記。販売業者・連絡先・返品ポリシーなどをご確認ください。',
       },
       '/contact': {
-        title: 'お問い合わせ | Coco Kusuri',
-        description: 'Coco Kusuriへのお問い合わせ。ご質問・ご意見はこちらからお気軽にどうぞ。',
+        title: 'お問い合わせ | koreamall24',
+        description: 'koreamall24へのお問い合わせ。ご質問・ご意見はこちらからお気軽にどうぞ。',
       },
     };
 
@@ -199,7 +199,7 @@ async function injectPageMeta(html: string, url: string): Promise<string> {
       const siteJsonLd = {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Coco Kusuri",
+        "name": "koreamall24",
         "url": BASE_URL,
         "description": "医薬品・健康商品の個人輸入代行サービス",
         "potentialAction": {
@@ -211,7 +211,7 @@ async function injectPageMeta(html: string, url: string): Promise<string> {
       const orgJsonLd = {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Coco Kusuri",
+        "name": "koreamall24",
         "url": BASE_URL,
         "logo": "https://d2xsxph8kpxj0f.cloudfront.net/310519663287886477/UQKFprxuYdKrk4tZ9zXFHM/brand/ogDefaultImage/1778498030484-yz3xnvug57a.png",
         "sameAs": []
@@ -232,10 +232,10 @@ async function injectPageMeta(html: string, url: string): Promise<string> {
       if (getAnnouncementById) {
         const notice = await getAnnouncementById(noticeId).catch(() => null);
         if (notice) {
-          const noticeTitle = `${notice.titleJa} | Coco Kusuri お知らせ`;
+          const noticeTitle = `${notice.titleJa} | koreamall24 お知らせ`;
           const noticeDesc = notice.contentJa
             ? String(notice.contentJa).replace(/<[^>]*>/g, '').slice(0, 160)
-            : `Coco Kusuriからのお知らせ: ${notice.titleJa}`;
+            : `koreamall24からのお知らせ: ${notice.titleJa}`;
           return injectMeta(html, { title: noticeTitle, description: noticeDesc, url: `${BASE_URL}/bbs/notice/${noticeId}` });
         }
       }
@@ -247,7 +247,7 @@ async function injectPageMeta(html: string, url: string): Promise<string> {
       getSiteSetting('ogDefaultDescription'),
       getSiteSetting('ogDefaultImage'),
     ]);
-    const defTitle = ogTitleSetting?.value || 'Coco Kusuri｜医薬品・健康商品の個人輸入代行サイト';
+    const defTitle = ogTitleSetting?.value || 'koreamall24｜医薬品・健康商品の個人輸入代行サイト';
     const defDesc = ogDescSetting?.value || '医薬品・健康商品の個人輸入代行サービス。正規品保証・送料無料・24時間対応。';
     const defImage = ogImageSetting?.value || defaultOgImage;
     const canonicalUrl = `${BASE_URL}${path_ === '/' ? '' : path_}`;

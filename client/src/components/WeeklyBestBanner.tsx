@@ -198,10 +198,6 @@ export function WeeklyBestBanner() {
                 {p.brandJa && (
                   <p className="text-xs text-blue-600 font-medium mb-1">{p.brandJa}</p>
                 )}
-                {/* 영문명 */}
-                {p.name && (
-                  <p className="text-xs text-gray-400 mb-1 line-clamp-1">{p.name}</p>
-                )}
                 {/* 일본어 상품명 */}
                 <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-1 leading-snug line-clamp-3">
                   {p.nameJa}

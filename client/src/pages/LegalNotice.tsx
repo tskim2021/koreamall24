@@ -17,9 +17,9 @@ const legalRows = [
     value: "Rm 901&902 9/F Taurus Bldg 21A&B Granville Road Tsim Sha Tsui KL",
   },
   {
-    label: "メールアドレス",
-    value: "support@cocokusuri.com",
-    href: "mailto:support@cocokusuri.com",
+    label: "お問い合わせ",
+    value: "お問い合わせフォーム",
+    href: "/mypage/inquiries",
   },
   {
     label: "販売URL",

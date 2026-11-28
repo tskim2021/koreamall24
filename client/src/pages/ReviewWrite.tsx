@@ -241,7 +241,7 @@ export default function ReviewWrite() {
                             className="w-4 h-4"
                           />
                           <div className="flex-1">
-                            <p className="font-medium text-gray-900">{product.product.name}</p>
+                            <p className="font-medium text-gray-900">{product.product.nameJa || "商品"}</p>
                             <p className="text-sm text-gray-500">注文番号: {product.orderId}</p>
                             {product.hasReview && (
                               <p className="text-xs text-green-600 mt-1">✓ レビュー済み</p>

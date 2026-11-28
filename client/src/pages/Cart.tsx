@@ -590,13 +590,13 @@ export default function Cart() {
                                         {(tier as any).icon === 'Crown' ? <Crown className="w-3 h-3" /> :
                                          (tier as any).icon === 'Gem' ? <Gem className="w-3 h-3" /> :
                                          <Star className="w-3 h-3" />}
-                                        {(tier as any).nameKo || (tier as any).name}
+                                        {(tier as any).name}
                                       </span>
                                     )}
                                   </div>
                                   {tier && tierDiscountRate > 0 && (
                                     <p className="text-xs text-gray-400 mt-0.5">
-                                      {(tier as any).nameKo || (tier as any).name}ランク特典: ポイント{(pointsPercent * tierPointRate).toFixed(1)}%還元 (x{tierPointRate}倍) + 会員割引{tierDiscountRate}%
+                                      {(tier as any).name}ランク特典: ポイント{(pointsPercent * tierPointRate).toFixed(1)}%還元 (x{tierPointRate}倍) + 会員割引{tierDiscountRate}%
                                     </p>
                                   )}
                                 </div>
@@ -780,7 +780,7 @@ export default function Cart() {
                                 {(tierData.tier as any).icon === 'Crown' ? <Crown className="w-3 h-3" /> :
                                  (tierData.tier as any).icon === 'Gem' ? <Gem className="w-3 h-3" /> :
                                  <Star className="w-3 h-3" />}
-                                {(tierData.tier as any).nameKo || (tierData.tier as any).name}ランク
+                                {(tierData.tier as any).name}ランク
                               </span>
                             </div>
                           )}

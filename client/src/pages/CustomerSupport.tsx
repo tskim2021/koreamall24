@@ -7,15 +7,6 @@ import { MessageCircle, FileQuestion, Phone, Mail, ChevronRight, HelpCircle, Boo
 export default function CustomerSupport() {
   const supportMenus = [
     {
-      icon: <MessageCircle className="w-8 h-8 text-green-500" />,
-      title: "LINEで相談",
-      description: "LINEで気軽にご相談いただけます。スタッフが丁寧にお答えします。",
-      href: "https://line.me/ti/p/~@cocokusuri",
-      external: true,
-      badge: "おすすめ",
-      badgeColor: "bg-green-500",
-    },
-    {
       icon: <FileQuestion className="w-8 h-8 text-blue-500" />,
       title: "お問い合わせフォーム",
       description: "ご質問・ご要望はこちらのフォームからお気軽にお送りください。",
@@ -108,9 +99,6 @@ export default function CustomerSupport() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-bold text-gray-800">{menu.title}</span>
-                      {menu.badge && (
-                        <span className={`${menu.badgeColor} text-white text-[10px] font-bold px-1.5 py-0.5 rounded`}>{menu.badge}</span>
-                      )}
                     </div>
                     <p className="text-sm text-gray-500">{menu.description}</p>
                   </div>
@@ -126,9 +114,6 @@ export default function CustomerSupport() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-bold text-gray-800">{menu.title}</span>
-                      {menu.badge && (
-                        <span className={`${menu.badgeColor} text-white text-[10px] font-bold px-1.5 py-0.5 rounded`}>{menu.badge}</span>
-                      )}
                     </div>
                     <p className="text-sm text-gray-500">{menu.description}</p>
                   </div>

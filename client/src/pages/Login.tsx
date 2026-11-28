@@ -21,9 +21,15 @@ export default function Login() {
   const loginMutation = trpc.auth.loginWithEmail.useMutation({
     onSuccess: (data) => {
       toast.success(data.message);
+      // Preserve the internal page that originally required authentication.
+      // Never redirect to an external URL from a query-string value.
+      const requestedRedirect = new URLSearchParams(window.location.search).get("redirect");
+      const redirectTo = requestedRedirect && requestedRedirect.startsWith("/") && !requestedRedirect.startsWith("//")
+        ? requestedRedirect
+        : "/";
       // React 언마운트 완료 후 리다이렉트하여 removeChild 오류 방지
       setTimeout(() => {
-        window.location.href = "/";
+        window.location.href = redirectTo;
       }, 1000);
     },
     onError: (error) => {
@@ -73,17 +79,17 @@ export default function Login() {
             <form onSubmit={handleEmailLogin} className="space-y-3 md:space-y-5">
               <div className="space-y-1.5 md:space-y-2">
                 <Label htmlFor="email" className="text-xs md:text-sm font-medium text-gray-700">
-                  メールアドレス <span className="text-red-500">*</span>
+                  メールアドレスまたはID <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="email"
-                  type="email"
-                  placeholder="メールアドレスを入力ください"
+                  type="text"
+                  placeholder="メールアドレスまたはIDを入力ください"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="h-12 md:h-14 text-base border-gray-300 rounded-lg"
                   disabled={loginMutation.isPending}
-                  autoComplete="email"
+                  autoComplete="username"
                 />
               </div>
 

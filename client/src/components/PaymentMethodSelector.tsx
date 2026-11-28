@@ -178,24 +178,31 @@ export default function PaymentMethodSelector({ selected, onChange, currency }: 
     );
   }
 
-  if (!providers || providers.length === 0) {
-    return (
-      <div className="py-4 text-sm text-gray-500 text-center">
-        現在ご利用可能なお支払い方法がありません。管理者にお問い合わせください。
-      </div>
-    );
-  }
+  // Keep checkout usable while a live gateway is being configured. This is a
+  // manual order request only; no card/payment is claimed or charged here.
+  const fallbackProvider = {
+    provider: "bank_transfer",
+    displayName: "銀行振込（注文受付）",
+    logo: "🏦",
+    isManual: true,
+    supportedCurrencies: [],
+    paymentDeadlineDays: 7,
+    instructions: "ご注文受付後、運営から振込先と入金案内をメールでご連絡します。",
+  };
+  const availableProviders = providers && providers.length > 0 ? providers : [fallbackProvider];
 
   // Filter by currency if provided
   const filtered = currency
-    ? providers.filter(
+    ? availableProviders.filter(
         (p) => !p.supportedCurrencies?.length || p.supportedCurrencies.includes(currency)
       )
-    : providers;
+    : availableProviders;
+
+  const renderedProviders = filtered.length > 0 ? filtered : [fallbackProvider];
 
   return (
     <div className="space-y-2">
-      {filtered.map((provider) => {
+      {renderedProviders.map((provider) => {
         const isSelected = selected === provider.provider;
         const icon = PROVIDER_ICONS[provider.provider] || <CreditCard className="w-5 h-5" />;
         const colorClass = PROVIDER_COLORS[provider.provider] || "text-gray-600";

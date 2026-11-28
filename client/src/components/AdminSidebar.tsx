@@ -167,7 +167,7 @@ export default function AdminSidebar() {
           <Link href="/admin" className="flex items-center gap-2">
             <Store className="w-6 h-6 text-pink-600" />
             <div>
-              <h2 className="text-sm font-bold text-gray-900 leading-tight">Coco kusuri</h2>
+              <h2 className="text-sm font-bold text-gray-900 leading-tight">KOREAMALL24</h2>
               <p className="text-xs text-gray-400 leading-tight">관리 시스템</p>
             </div>
           </Link>

@@ -1303,7 +1303,7 @@ export default function Checkout() {
                                   {(tier as any).icon === 'Crown' ? <Crown className="w-3 h-3" /> :
                                    (tier as any).icon === 'Gem' ? <Gem className="w-3 h-3" /> :
                                    <Star className="w-3 h-3" />}
-                                  {(tier as any).nameKo || (tier as any).name}
+                                  {(tier as any).name}
                                 </span>
                               )}
                             </div>
@@ -1538,7 +1538,7 @@ export default function Checkout() {
                         {(tierData.tier as any).icon === 'Crown' ? <Crown className="w-3 h-3" /> :
                          (tierData.tier as any).icon === 'Gem' ? <Gem className="w-3 h-3" /> :
                          <Star className="w-3 h-3" />}
-                        {(tierData.tier as any).nameKo || (tierData.tier as any).name}ランク
+                        {(tierData.tier as any).name}ランク
                       </span>
                     </div>
                   )}

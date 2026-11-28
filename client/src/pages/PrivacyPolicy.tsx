@@ -66,7 +66,8 @@ const sections = [
     contact: {
       company: "koreamall24",
       manager: "高橋 悠介",
-      email: "support@cocokusuri.com",
+      email: "お問い合わせフォーム",
+      contactHref: "/mypage/inquiries",
       url: "https://koreamall24.com",
     },
   },
@@ -122,7 +123,7 @@ export default function PrivacyPolicy() {
                     {[
                       { label: "販売業者", content: <span className="text-gray-800">{section.contact.company}</span> },
                       { label: "担当者", content: <span className="text-gray-800">{section.contact.manager}</span> },
-                      { label: "メール", content: <a href={`mailto:${section.contact.email}`} className="text-primary hover:underline break-all">{section.contact.email}</a> },
+                      { label: "お問い合わせ", content: <a href={section.contact.contactHref || `mailto:${section.contact.email}`} className="text-primary hover:underline break-all">{section.contact.email}</a> },
                       { label: "URL", content: <a href={section.contact.url} className="text-primary hover:underline break-all" target="_blank" rel="noopener noreferrer">{section.contact.url}</a> },
                     ].map((item, i) => (
                       <div key={i} className="flex flex-col sm:flex-row">

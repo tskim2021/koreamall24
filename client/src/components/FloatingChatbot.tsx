@@ -13,6 +13,7 @@ type Message = {
   products?: Array<{
     id: number;
     name: string;
+    nameJa?: string | null;
     price: string;
     imageUrl: string | null;
     stock: number;
@@ -57,7 +58,7 @@ export default function FloatingChatbot() {
 
   // Extract product ID from URL if on product page
   const productIdMatch = location.match(/\/product\/(\d+)/);
-  const productId = productIdMatch ? parseInt(productIdMatch[1]) : undefined;
+  const productId = parseInt(productIdMatch?.[1] || "", 10) || undefined;
 
   // Get page context
   const getPageContext = useCallback(() => {
@@ -79,7 +80,7 @@ export default function FloatingChatbot() {
   const isEnabled = chatbotSettings?.CHATBOT_ENABLED !== "false";
 
   // Get welcome message from settings
-  const welcomeMessage = chatbotSettings?.WELCOME_MESSAGE || "こんにちは！ココくすりのお買い物をサポートします。お気軽にご質問ください。";
+  const welcomeMessage = chatbotSettings?.WELCOME_MESSAGE || "こんにちは！koreamall24のお買い物をサポートします。お気軽にご質問ください。";
 
   // Get suggested questions
   const suggestionsInput = useMemo(() => ({ page: getPageContext(), productId }), [getPageContext, productId]);
@@ -235,7 +236,7 @@ export default function FloatingChatbot() {
               <Sparkles className="w-4 h-4 text-primary" />
             </div>
             <div>
-              <p className="text-sm font-semibold">ココくすり AIアシスタント</p>
+              <p className="text-sm font-semibold">koreamall24 AIアシスタント</p>
               <p className="text-[10px] text-muted-foreground">24時間対応</p>
             </div>
           </div>
@@ -387,7 +388,7 @@ export default function FloatingChatbot() {
                           {product.imageUrl ? (
                             <img
                               src={product.imageUrl}
-                              alt={product.name}
+                              alt={product.nameJa || "商品"}
                               className="w-12 h-12 object-cover rounded"
                             />
                           ) : (
@@ -396,7 +397,7 @@ export default function FloatingChatbot() {
                             </div>
                           )}
                             <div className="flex-1 min-w-0">
-                            <p className="text-xs font-medium truncate">{product.name}</p>
+                            <p className="text-xs font-medium truncate">{product.nameJa || "商品"}</p>
                             <div className="flex items-center gap-2 mt-0.5">
                               <p className="text-xs font-bold text-primary">{formatPrice(product.price)}</p>
                               {product.isInStock ? (

@@ -112,8 +112,8 @@ export default function BbsNotice() {
     <>
       <SEOHead
         title="お知らせ"
-        description="ココくすりの最新のお知らせをご確認ください。"
-        keywords="お知らせ, ニュース, 日本医薬品, ココくすり"
+        description="koreamall24の最新のお知らせをご確認ください。"
+        keywords="お知らせ, ニュース, 日本医薬品, koreamall24"
       />
       <Header />
       <main className="min-h-screen bg-gray-50">
@@ -127,7 +127,7 @@ export default function BbsNotice() {
               お知らせ
             </h1>
             <p className="text-muted-foreground text-sm md:text-base max-w-xl mx-auto">
-              ココくすりからの最新情報をご確認ください。
+              koreamall24からの最新情報をご確認ください。
             </p>
 
             {/* 検索ボックス */}

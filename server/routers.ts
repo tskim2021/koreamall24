@@ -80,6 +80,7 @@ import {
   verifyEmailCode,
   isEmailVerified,
   getRegisteredUserByEmail,
+  getRegisteredUserByLoginId,
   createRegisteredUser,
   updateRegisteredUserLastSignIn,
   upsertUser,
@@ -328,13 +329,13 @@ export const appRouter = router({
     // Email/password login
     loginWithEmail: publicProcedure
       .input(z.object({
-        email: z.string().email(),
+        email: z.string().min(1),
         password: z.string().min(1),
         rememberMe: z.boolean().optional().default(false),
       }))
       .mutation(async ({ ctx, input }) => {
-        // Find registered user by email
-        const registeredUser = await getRegisteredUserByEmail(input.email);
+        // Find registered user by email or nickname/ID
+        const registeredUser = await getRegisteredUserByLoginId(input.email);
         if (!registeredUser) {
           throw new TRPCError({
             code: "UNAUTHORIZED",
@@ -1202,8 +1203,11 @@ export const appRouter = router({
     add: protectedProcedure
       .input(z.object({ productId: z.number(), quantity: z.number().optional(), priceTierId: z.number().optional() }))
       .mutation(async ({ ctx, input }) => {
-        await addToCart(ctx.user.id, input.productId, input.quantity ?? 1, input.priceTierId);
-        return { success: true };
+        const item = await addToCart(ctx.user.id, input.productId, input.quantity ?? 1, input.priceTierId);
+        if (!item) {
+          throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'カートへの追加に失敗しました。もう一度お試しください。' });
+        }
+        return { success: true, cartItemId: item.id };
       }),
     updateQuantity: protectedProcedure
       .input(z.object({ id: z.number(), quantity: z.number() }))
@@ -9809,7 +9813,7 @@ ${popularList}
         switch (input.emailType) {
           case 'test_email':
           case 'registration_complete':
-            result = await emailSvc.sendTestEmail({ to: input.to, from: 'noreply@cocokusuri.com', fromName: 'Coco Kusuri' });
+            result = await emailSvc.sendTestEmail({ to: input.to, from: 'noreply@koreamall24.com', fromName: 'koreamall24' });
             subject = '【テスト】テストメール';
             break;
           case 'order_confirmation':
@@ -9894,7 +9898,7 @@ ${popularList}
             subject = '【テスト】イベント終了間近';
             break;
           case 'announcement':
-            result = await emailSvc.sendTestEmail({ to: input.to, from: 'noreply@cocokusuri.com', fromName: 'Coco Kusuri' });
+            result = await emailSvc.sendTestEmail({ to: input.to, from: 'noreply@koreamall24.com', fromName: 'koreamall24' });
             subject = '【テスト】お知らせ';
             break;
           case 'inquiry_reply':
@@ -9902,7 +9906,7 @@ ${popularList}
           case 'coupon_expiry_warning':
           case 'first_purchase_coupon':
           default:
-            result = await emailSvc.sendTestEmail({ to: input.to, from: 'noreply@cocokusuri.com', fromName: 'Coco Kusuri' });
+            result = await emailSvc.sendTestEmail({ to: input.to, from: 'noreply@koreamall24.com', fromName: 'koreamall24' });
             subject = `【テスト】${input.emailType}`;
         }
         await createEmailLog({ emailType: input.emailType, to: input.to, subject, status: result.success ? 'sent' : 'failed', errorMessage: result.error, userId: ctx.user.id, metadata: JSON.stringify({ isTest: true, sentBy: ctx.user.name }) });

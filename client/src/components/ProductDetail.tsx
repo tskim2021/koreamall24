@@ -1034,7 +1034,6 @@ export default function ProductDetail() {
 
                 {/* Product Title */}
                 <h1 className="text-xl lg:text-2xl font-bold text-gray-900 leading-tight mb-1">{product.nameJa}</h1>
-                <p className="text-sm text-gray-400 mb-3">{product.name}</p>
 
                 {/* Coupon Excluded Badge */}
                 {(product as any).couponExcluded && (
@@ -1253,7 +1252,7 @@ export default function ProductDetail() {
                   </div>
                   {isAuthenticated && displayTier && (
                     <p className="text-xs text-amber-600 mt-1 pl-6">
-                      あなたのランク: <strong>{displayTier.nameKo || displayTier.name}</strong> — ポイント還元率 <strong>{effectivePointRate}%</strong>
+                      あなたのランク: <strong>{displayTier.name}</strong> — ポイント還元率 <strong>{effectivePointRate}%</strong>
                     </p>
                   )}
 
@@ -1462,7 +1461,9 @@ export default function ProductDetail() {
               <div
                 className="product-content"
                 dangerouslySetInnerHTML={{
-                  __html: (product as any).productContent || product.description || product.descriptionJa || "商品説明はありません。",
+                  // Prefer the Japanese description. Legacy productContent/description
+                  // can contain the old Korean copy and must not override it.
+                  __html: product.descriptionJa || (product as any).productContent || product.description || "商品説明はありません。",
                 }}
               />
             </div>

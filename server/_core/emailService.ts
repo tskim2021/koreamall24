@@ -16,9 +16,9 @@ function replaceTemplateVariables(text: string, variables: Record<string, string
 const BRAND_COLOR = '#D30046';
 const BRAND_GRADIENT = 'linear-gradient(135deg, #D30046 0%, #a8003a 100%)';
 const BRAND_LIGHT = '#FFF0F3'; // 연한 배경용
-const SHOP_NAME = 'Coco Kusuri';
+const SHOP_NAME = 'koreamall24';
 const SHOP_TAGLINE = '医薬品・健康商品の個人輸入';
-const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663287886477/UQKFprxuYdKrk4tZ9zXFHM/email-assets/logo_color.png';
+const LOGO_URL = 'https://koreamall24.com/koreamall24-logo.svg';
 const LOGO_WHITE_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/manus-storage/Group4_%ED%9D%B0%EC%83%89_092a3239.png';
 
 function emailHeader(title: string, subtitle?: string): string {
@@ -30,7 +30,7 @@ function emailHeader(title: string, subtitle?: string): string {
       <!-- Header content -->
       <div class="email-header-cell" style="padding: 28px 30px 24px; text-align: center; border-bottom: 1px solid #f0f0f0;">
         <div class="email-header-logo" style="margin-bottom: 14px;">
-          <img src="${LOGO_URL}" alt="Coco Kusuri" style="height: 66px; display: inline-block; vertical-align: middle; max-width: 220px;">
+          <img src="${LOGO_URL}" alt="koreamall24" style="height: 66px; display: inline-block; vertical-align: middle; max-width: 220px;">
         </div>
         <h1 class="email-h1" style="margin: 0; color: #1a1a1a; font-size: 20px; font-weight: 700; line-height: 1.4;">${title}</h1>
         ${subtitle ? `<p style="margin: 8px 0 0 0; color: #666; font-size: 13px;">${subtitle}</p>` : ''}
@@ -40,7 +40,7 @@ function emailHeader(title: string, subtitle?: string): string {
 }
 
 function emailFooter(): string {
-  const frontendUrl = process.env.VITE_FRONTEND_URL || 'https://cocokusuri.com';
+  const frontendUrl = process.env.VITE_FRONTEND_URL || 'https://koreamall24.com';
   return `
   <tr>
     <td style="padding: 0;">
@@ -208,7 +208,7 @@ export async function sendRetryPaymentEmail(params: {
     }
 
     const { to, customerName, orderAmount, retryPaymentUrl, failureReason, from, fromName } = params;
-    const fromAddress = from && fromName ? `${fromName} <${from}>` : (from || `${SHOP_NAME} <noreply@cocokusuri.com>`);
+    const fromAddress = from && fromName ? `${fromName} <${from}>` : (from || `${SHOP_NAME} <noreply@koreamall24.com>`);
 
     const emailHtml = emailWrapper(
       emailHeader('お支払い再手続きのお願い', 'お支払いが完了していません') +
@@ -274,7 +274,7 @@ export async function sendNewInquiryNotification(
   from?: string,
   fromName?: string
 ) {
-  const emailFrom = from || 'noreply@cocokusuri.com';
+  const emailFrom = from || 'noreply@koreamall24.com';
   const emailFromName = fromName || SHOP_NAME;
   const adminUrl = process.env.VITE_FRONTEND_URL || 'https://localhost:3000';
 
@@ -332,7 +332,7 @@ export async function sendInquiryReplyNotification(
   from?: string,
   fromName?: string
 ) {
-  const emailFrom = from || 'noreply@cocokusuri.com';
+  const emailFrom = from || 'noreply@koreamall24.com';
   const emailFromName = fromName || SHOP_NAME;
 
   const htmlContent = emailWrapper(
@@ -497,7 +497,7 @@ export async function sendDeliveryCompletionEmail(params: {
     );
 
     const result = await resend.emails.send({
-      from: `${SHOP_NAME} <noreply@cocokusuri.com>`,
+      from: `${SHOP_NAME} <noreply@koreamall24.com>`,
       to,
       subject: `【配達完了】ご注文 ${orderNumber} が配達されました 🎉`,
       html: emailHtml,
@@ -630,7 +630,7 @@ export async function sendReviewReminderEmail(params: {
     );
 
     const result = await resend.emails.send({
-      from: `${SHOP_NAME} <noreply@cocokusuri.com>`,
+      from: `${SHOP_NAME} <noreply@koreamall24.com>`,
       to,
       subject: reminderTitle,
       html: emailHtml,
@@ -774,7 +774,7 @@ export async function sendOrderCancellationEmail(params: {
     const { Resend: ResendClass } = await import('resend');
     const resendClient = new ResendClass(process.env.RESEND_API_KEY);
     const result = await resendClient.emails.send({
-      from: `${SHOP_NAME} <noreply@cocokusuri.com>`,
+      from: `${SHOP_NAME} <noreply@koreamall24.com>`,
       to,
       subject: `${subjectLabel} ご注文番号 ${orderNumber}`,
       html: emailHtml,
@@ -880,7 +880,7 @@ export async function sendDelayedShipmentNotificationEmail(params: {
     );
 
     const result = await resend.emails.send({
-      from: `${SHOP_NAME} <noreply@cocokusuri.com>`,
+      from: `${SHOP_NAME} <noreply@koreamall24.com>`,
       to,
       subject: `【配送遅延のお知らせ】ご注文番号 ${orderNumber}`,
       html: emailHtml,
@@ -913,7 +913,7 @@ export async function sendNewProductQuestionNotification(
   from?: string,
   fromName?: string
 ) {
-  const emailFrom = from || 'noreply@cocokusuri.com';
+  const emailFrom = from || 'noreply@koreamall24.com';
   const emailFromName = fromName || SHOP_NAME;
   const adminUrl = process.env.VITE_FRONTEND_URL || 'https://localhost:3000';
 
@@ -969,7 +969,7 @@ export async function sendInquiryReceiptConfirmation(
   from?: string,
   fromName?: string
 ) {
-  const emailFrom = from || 'noreply@cocokusuri.com';
+  const emailFrom = from || 'noreply@koreamall24.com';
   const emailFromName = fromName || SHOP_NAME;
 
   const htmlContent = emailWrapper(
@@ -1064,7 +1064,7 @@ export async function sendPointExpiryAlertEmail(params: {
           <tr>
             <td style="background:${BRAND_GRADIENT};border-radius:16px 16px 0 0;padding:32px 40px;text-align:center;">
               <div style="margin-bottom:14px;">
-                <img src="${LOGO_URL}" alt="Coco Kusuri" style="width:48px;height:48px;border-radius:10px;display:inline-block;vertical-align:middle;margin-right:8px;">
+                <img src="${LOGO_URL}" alt="koreamall24" style="width:48px;height:48px;border-radius:10px;display:inline-block;vertical-align:middle;margin-right:8px;">
                 <span style="color:white;font-size:20px;font-weight:800;letter-spacing:0.5px;vertical-align:middle;">${shopName}</span>
               </div>
               <div style="color:rgba(255,255,255,0.8);font-size:11px;margin-bottom:18px;letter-spacing:1.5px;">${SHOP_TAGLINE}</div>
@@ -1175,7 +1175,7 @@ a5568;line-height:1.8;">
 </html>`;
 
     const result = await resend.emails.send({
-      from: `${shopName} <noreply@cocokusuri.com>`,
+      from: `${shopName} <noreply@koreamall24.com>`,
       to,
       subject: `【重要】${expiringPoints.toLocaleString()}ptが${expiryDateStr}に失効します`,
       html: htmlContent,
@@ -1217,7 +1217,7 @@ export function generateEmailPreviewHtml(emailType: string): string {
           </p>
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
             <p style="margin: 0 0 8px 0; font-size: 13px; color: #666;">送信者</p>
-            <p style="margin: 0; font-size: 16px; font-weight: bold; color: #D30046;">Kusuri Mall &lt;noreply@cocokusuri.com&gt;</p>
+            <p style="margin: 0; font-size: 16px; font-weight: bold; color: #D30046;">koreamall24 &lt;noreply@koreamall24.com&gt;</p>
           </div>
           <p style="font-size: 12px; color: #999; margin: 0;">このメールはテスト目的で送信されました。</p>
         </td></tr>` +
@@ -1494,10 +1494,10 @@ export function generateEmailPreviewHtml(emailType: string): string {
 
     case 'registration_complete':
       return emailWrapper(
-        emailHeader('🎉 会員登録が完了しました', 'Coco Kusuriへようこそ！') +
+        emailHeader('🎉 会員登録が完了しました', 'koreamall24へようこそ！') +
         `<tr><td class="email-body-cell" style="padding: 40px 30px;">
           <p style="margin: 0 0 20px 0; font-size: 16px; color: #333; line-height: 1.6;">${userName}</p>
-          <p style="font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 24px;">Coco Kusuriへのご登録ありがとうございます！日本の医薬品・健康商品を安心してお買い物いただけます。</p>
+          <p style="font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 24px;">koreamall24へのご登録ありがとうございます！医薬品・健康商品を安心してお買い物いただけます。</p>
           <div style="background: #FFF0F3; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
             <h3 style="margin: 0 0 12px 0; color: #D30046; font-size: 15px;">🌸 会員特典</h3>
             <ul style="margin: 0; padding-left: 20px; color: #555; font-size: 14px; line-height: 2;">
@@ -1556,7 +1556,7 @@ export function generateEmailPreviewHtml(emailType: string): string {
     case 'event_started':
     case 'event_ending_soon':
       return emailWrapper(
-        emailHeader('📢 Coco Kusuriからのお知らせ', emailType === 'event_ending_soon' ? '⏰ セール終了まであと1日！' : '🎉 新着情報') +
+        emailHeader('📢 koreamall24からのお知らせ', emailType === 'event_ending_soon' ? '⏰ セール終了まであと1日！' : '🎉 新着情報') +
         `<tr><td class="email-body-cell" style="padding: 40px 30px;">
           <p style="margin: 0 0 20px 0; font-size: 16px; color: #333; line-height: 1.6;">${userName}</p>
           <div style="background: linear-gradient(135deg, #FFF0F3 0%, #FFE0E8 100%); border-radius: 16px; padding: 30px; margin-bottom: 24px; text-align: center;">
@@ -1709,7 +1709,7 @@ export async function sendTierUpgradeEmail(params: {
       emailFooter()
     );
     const result = await resend.emails.send({
-      from: `${SHOP_NAME} <noreply@cocokusuri.com>`,
+      from: `${SHOP_NAME} <noreply@koreamall24.com>`,
       to: [to],
       subject: `【${SHOP_NAME}】おめでとうございます！会員ランクが${newTierName}にアップしました`,
       html: emailHtml,
@@ -1766,7 +1766,7 @@ export async function sendReferralSuccessEmail(params: {
       emailFooter()
     );
     const result = await resend.emails.send({
-      from: `${SHOP_NAME} <noreply@cocokusuri.com>`,
+      from: `${SHOP_NAME} <noreply@koreamall24.com>`,
       to: [to],
       subject: `【${SHOP_NAME}】紹介報酬 ${rewardPoints.toLocaleString()}ポイントが付与されました`,
       html: emailHtml,
@@ -2873,7 +2873,7 @@ export async function sendCustomsInquiryEmail(params: {
       console.warn('[Email] RESEND_API_KEY not configured, skipping customs inquiry email');
       return { success: false, error: 'RESEND_API_KEY not configured' };
     }
-    const frontendUrl = process.env.VITE_FRONTEND_URL || 'https://cocokusuri.com';
+    const frontendUrl = process.env.VITE_FRONTEND_URL || 'https://koreamall24.com';
 
     const trackingSection = trackingNumber
       ? `<div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 20px; margin: 24px 0;">

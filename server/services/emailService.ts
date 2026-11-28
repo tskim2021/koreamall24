@@ -11,8 +11,8 @@ import { eq } from "drizzle-orm";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const SENDER_EMAIL = "noreply@cocokusuri.com";
-const SENDER_NAME = "Coco Kusuri";
+const SENDER_EMAIL = "noreply@koreamall24.com";
+const SENDER_NAME = "koreamall24";
 
 export interface SendEmailOptions {
   to: string;
@@ -135,9 +135,9 @@ export async function sendOrderShippedEmail(
   trackingNumber?: string,
   trackingUrl?: string
 ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-  const frontendUrl = process.env.VITE_FRONTEND_URL || 'https://cocokusuri.com';
+  const frontendUrl = process.env.VITE_FRONTEND_URL || 'https://koreamall24.com';
   const brandGradient = 'linear-gradient(135deg, #db2777 0%, #be185d 100%)';
-  const logoUrl = 'https://d2xsxph8kpxj0f.cloudfront.net/manus-storage/coco-favicon_c4da7071.png';
+  const logoUrl = 'https://koreamall24.com/koreamall24-logo.svg';
 
   const trackingInfo = trackingNumber
     ? `
@@ -157,7 +157,7 @@ export async function sendOrderShippedEmail(
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>配送のお知らせ - Coco Kusuri</title>
+  <title>配送のお知らせ - koreamall24</title>
 </head>
 <body style="margin:0;padding:0;background:#f3f4f6;font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3f4f6;">
@@ -167,8 +167,8 @@ export async function sendOrderShippedEmail(
           <tr>
             <td style="background:${brandGradient};border-radius:16px 16px 0 0;padding:32px 40px;text-align:center;">
               <div style="margin-bottom:14px;">
-                <img src="${logoUrl}" alt="Coco Kusuri" style="width:52px;height:52px;border-radius:11px;display:inline-block;vertical-align:middle;margin-right:10px;">
-                <span style="color:white;font-size:21px;font-weight:800;vertical-align:middle;">Coco Kusuri</span>
+                <img src="${logoUrl}" alt="koreamall24" style="width:52px;height:52px;border-radius:11px;display:inline-block;vertical-align:middle;margin-right:10px;">
+                <span style="color:white;font-size:21px;font-weight:800;vertical-align:middle;">koreamall24</span>
               </div>
               <div style="color:rgba(255,255,255,0.8);font-size:11px;letter-spacing:1.5px;">ococくすり | 医薬品・健康商品の個人輸入</div>
             </td>
@@ -183,7 +183,7 @@ export async function sendOrderShippedEmail(
           <tr>
             <td style="background:white;padding:0 40px 32px;">
               <p style="margin:0 0 16px 0;font-size:15px;color:#374151;line-height:1.8;">
-                いつも <strong style="color:#db2777;">Coco Kusuri</strong> をご利用いただきありがとうございます。<br>
+                いつも <strong style="color:#db2777;">koreamall24</strong> をご利用いただきありがとうございます。<br>
                 ご注文いただいた商品が発送されました。
               </p>
               <div style="background:#f9fafb;border-radius:10px;padding:16px 20px;margin-bottom:20px;">
@@ -198,7 +198,7 @@ export async function sendOrderShippedEmail(
           <tr>
             <td style="background:#1f2937;border-radius:0 0 16px 16px;padding:24px 40px;text-align:center;">
               <p style="margin:0 0 8px 0;color:#9ca3af;font-size:13px;">
-                <a href="${frontendUrl}" style="color:#f9a8d4;text-decoration:none;font-weight:600;">Coco Kusuri</a>
+                <a href="${frontendUrl}" style="color:#f9a8d4;text-decoration:none;font-weight:600;">koreamall24</a>
                 &nbsp;·&nbsp;
                 <a href="${frontendUrl}/mypage" style="color:#9ca3af;text-decoration:none;">マイページ</a>
                 &nbsp;·&nbsp;
@@ -206,7 +206,7 @@ export async function sendOrderShippedEmail(
               </p>
               <p style="margin:0;color:#6b7280;font-size:11px;line-height:1.7;">
                 このメールは自動送信されています。返信はできません。<br>
-                &copy; ${new Date().getFullYear()} Coco Kusuri. All rights reserved.
+                &copy; ${new Date().getFullYear()} koreamall24. All rights reserved.
               </p>
             </td>
           </tr>
@@ -242,9 +242,9 @@ export async function sendReviewReminderEmail(
   orderNumber: string,
   reviewUrl?: string
 ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-  const frontendUrl2 = process.env.VITE_FRONTEND_URL || 'https://cocokusuri.com';
+  const frontendUrl2 = process.env.VITE_FRONTEND_URL || 'https://koreamall24.com';
   const brandGradient2 = 'linear-gradient(135deg, #db2777 0%, #be185d 100%)';
-  const logoUrl2 = 'https://d2xsxph8kpxj0f.cloudfront.net/manus-storage/coco-favicon_c4da7071.png';
+  const logoUrl2 = 'https://koreamall24.com/koreamall24-logo.svg';
 
   const html = `
 <!DOCTYPE html>
@@ -252,7 +252,7 @@ export async function sendReviewReminderEmail(
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>レビューをお願いします - Coco Kusuri</title>
+  <title>レビューをお願いします - koreamall24</title>
 </head>
 <body style="margin:0;padding:0;background:#f3f4f6;font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3f4f6;">
@@ -262,8 +262,8 @@ export async function sendReviewReminderEmail(
           <tr>
             <td style="background:${brandGradient2};border-radius:16px 16px 0 0;padding:32px 40px;text-align:center;">
               <div style="margin-bottom:14px;">
-                <img src="${logoUrl2}" alt="Coco Kusuri" style="width:52px;height:52px;border-radius:11px;display:inline-block;vertical-align:middle;margin-right:10px;">
-                <span style="color:white;font-size:21px;font-weight:800;vertical-align:middle;">Coco Kusuri</span>
+                <img src="${logoUrl2}" alt="koreamall24" style="width:52px;height:52px;border-radius:11px;display:inline-block;vertical-align:middle;margin-right:10px;">
+                <span style="color:white;font-size:21px;font-weight:800;vertical-align:middle;">koreamall24</span>
               </div>
               <div style="color:rgba(255,255,255,0.8);font-size:11px;letter-spacing:1.5px;">ococくすり | 医薬品・健康商品の個人輸入</div>
             </td>
@@ -289,7 +289,7 @@ export async function sendReviewReminderEmail(
           <tr>
             <td style="background:#1f2937;border-radius:0 0 16px 16px;padding:24px 40px;text-align:center;">
               <p style="margin:0 0 8px 0;color:#9ca3af;font-size:13px;">
-                <a href="${frontendUrl2}" style="color:#f9a8d4;text-decoration:none;font-weight:600;">Coco Kusuri</a>
+                <a href="${frontendUrl2}" style="color:#f9a8d4;text-decoration:none;font-weight:600;">koreamall24</a>
                 &nbsp;·&nbsp;
                 <a href="${frontendUrl2}/mypage" style="color:#9ca3af;text-decoration:none;">マイページ</a>
                 &nbsp;·&nbsp;
@@ -297,7 +297,7 @@ export async function sendReviewReminderEmail(
               </p>
               <p style="margin:0;color:#6b7280;font-size:11px;line-height:1.7;">
                 このメールは自動送信されています。返信はできません。<br>
-                &copy; ${new Date().getFullYear()} Coco Kusuri. All rights reserved.
+                &copy; ${new Date().getFullYear()} koreamall24. All rights reserved.
               </p>
             </td>
           </tr>

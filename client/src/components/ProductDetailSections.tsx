@@ -740,7 +740,7 @@ export function ImageManagementSection({
       {/* 헤더: 제목 + 안내문구 */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-semibold">상품 이미지 ({imageList.length}개)</span>
+          <span className="text-sm font-semibold">商品画像（{imageList.length}枚）</span>
           {savingOrder && (
             <span className="flex items-center gap-1 text-xs text-blue-600">
               <Loader2 className="w-3 h-3 animate-spin" />

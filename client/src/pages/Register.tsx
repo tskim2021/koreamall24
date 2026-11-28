@@ -361,7 +361,7 @@ export default function Register() {
               新規会員登録
             </h1>
             <p className="text-sm md:text-base text-gray-600 mb-6 md:mb-8">
-              ココくすりへようこそ。以下の情報を入力してご登録ください。
+              koreamall24へようこそ。以下の情報を入力してご登録ください。
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">

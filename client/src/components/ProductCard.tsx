@@ -95,7 +95,7 @@ export default function ProductCard({ product, rank, categoryName, badgeType, sh
     return <Pill className="h-9 w-9 text-blue-400" strokeWidth={1.6} />;
   })();
 
-  const fallbackTitle = ((product as any).nameJa || (product as any).name || "상품 이미지").replace(/\s+/g, " ").trim();
+  const fallbackTitle = ((product as any).nameJa || "商品画像").replace(/\s+/g, " ").trim();
 
   const getRankClass = (rank: number) => {
     switch (rank) {
@@ -246,19 +246,12 @@ export default function ProductCard({ product, rank, categoryName, badgeType, sh
             <p className="text-[10px] md:text-xs text-muted-foreground/70 mb-0.5 leading-tight">{categoryName}</p>
           )}
 
-          {/* 2. Korean product name (title) - small, muted, 1 line max */}
-          {product.name && (
-            <p className="text-[10px] md:text-[11px] text-muted-foreground/80 line-clamp-1 mb-0.5 leading-snug">
-              {product.name}
-            </p>
-          )}
-
-          {/* 2.5. Brand name */}
+          {/* Brand name */}
           {(product as any).brandJa && (
             <p className="text-[10px] md:text-xs text-blue-600 font-medium mb-0.5 leading-tight">{(product as any).brandJa}</p>
           )}
 
-          {/* 3. Japanese product name - 2 lines fixed height, bold */}
+          {/* Japanese product name - 2 lines fixed height, bold */}
           <div className="h-[2.4em] md:h-[2.6em] mb-1 md:mb-1.5">
             <h3 className="text-[12px] md:text-[13px] font-semibold line-clamp-2 group-hover:text-primary transition-colors leading-snug">
               {product.nameJa}

@@ -99,8 +99,8 @@ export default function BbsInquiry() {
     <>
       <SEOHead
         title="お問い合わせ"
-        description="ココくすりへのお問い合わせはこちらからどうぞ。"
-        keywords="お問い合わせ, カスタマーサポート, 日本医薬品, ココくすり"
+        description="koreamall24へのお問い合わせはこちらからどうぞ。"
+        keywords="お問い合わせ, カスタマーサポート, 日本医薬品, koreamall24"
         ogType="website"
       />
       <div className="min-h-screen flex flex-col bg-gray-50">

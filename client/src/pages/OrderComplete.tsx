@@ -476,7 +476,7 @@ export default function OrderComplete() {
                                     基本 {basePoints}P × {tierPointRate}倍
                                     {tierData?.tier && (
                                       <span className="font-medium" style={{ color: (tierData.tier as any).color }}>
-                                        ({(tierData.tier as any).nameKo || (tierData.tier as any).name}ランク特典)
+                                        ({(tierData.tier as any).name}ランク特典)
                                       </span>
                                     )}
                                   </p>

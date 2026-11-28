@@ -1230,6 +1230,25 @@ export async function getRegisteredUserByEmail(email: string): Promise<Registere
   }
 }
 
+/** Resolve a customer login by email address or nickname/ID. */
+export async function getRegisteredUserByLoginId(loginId: string): Promise<RegisteredUser | undefined> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get registered user by login ID: database not available");
+    return undefined;
+  }
+
+  try {
+    const result = await db.select().from(registeredUsers)
+      .where(or(eq(registeredUsers.email, loginId), eq(registeredUsers.nickname, loginId)))
+      .limit(1);
+    return result[0];
+  } catch (error) {
+    console.error("[Database] Failed to get registered user by login ID:", error);
+    return undefined;
+  }
+}
+
 export async function createRegisteredUser(data: InsertRegisteredUser): Promise<RegisteredUser | undefined> {
   const db = await getDb();
   if (!db) {

@@ -216,7 +216,7 @@ export default function MypageMembership() {
                     </div>
                     <div>
                       <h2 className="text-2xl font-bold leading-tight">{currentTier?.name || "未設定"}</h2>
-                      <p className="text-sm opacity-75">{currentTier?.nameKo || "未設定"}</p>
+                      <p className="text-sm opacity-75">{currentTier?.name || "未設定"}</p>
                     </div>
                   </div>
                   <div className="grid grid-cols-3 gap-3">
@@ -242,7 +242,7 @@ export default function MypageMembership() {
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm text-gray-600">
                       次のランク: <span className="font-semibold text-gray-800">{nextTier.name}</span>
-                      <span className="text-xs text-gray-500 ml-1">({nextTier.nameKo})</span>
+                      <span className="text-xs text-gray-500 ml-1">({nextTier.name})</span>
                     </span>
                     <span className="text-sm font-bold text-primary">
                       あと ¥{amountToNext.toLocaleString()}
@@ -291,7 +291,6 @@ export default function MypageMembership() {
                         <div>
                           <p className={`font-medium text-sm ${isCurrent ? "text-primary" : "text-gray-800"}`}>
                             {tier.name}
-                            <span className="text-xs text-gray-400 ml-1">({tier.nameKo})</span>
                             {isCurrent && (
                               <span className="ml-2 text-xs bg-primary text-white px-1.5 py-0.5 rounded-full">現在</span>
                             )}

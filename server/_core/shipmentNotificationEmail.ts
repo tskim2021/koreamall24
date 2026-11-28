@@ -6,9 +6,9 @@ import { notifyOwner } from "./notification";
 
 // ─── Brand Constants ───────────────────────────────────────────────────────
 const BRAND_GRADIENT = 'linear-gradient(135deg, #db2777 0%, #be185d 100%)'; // pink-600 → pink-700
-const SHOP_NAME = 'Coco Kusuri';
-const SHOP_TAGLINE = 'ococくすり | 医薬品・健康商品の個人輸入';
-const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/manus-storage/coco-favicon_c4da7071.png';
+const SHOP_NAME = 'koreamall24';
+const SHOP_TAGLINE = 'koreamall24 | 医薬品・健康商品の個人輸入';
+const LOGO_URL = 'https://koreamall24.com/koreamall24-logo.svg';
 
 const emailTemplates = {
   picked_up: {
@@ -126,7 +126,7 @@ function buildEmailContent(
   currentLocation?: string,
   currentLocationJa?: string
 ): string {
-  const frontendUrl = process.env.VITE_FRONTEND_URL || 'https://cocokusuri.com';
+  const frontendUrl = process.env.VITE_FRONTEND_URL || 'https://koreamall24.com';
   return `
     <!DOCTYPE html>
     <html lang="ja">
@@ -227,7 +227,7 @@ export async function sendReviewRequestEmail(
   orderNumber: string,
   reviewLink: string
 ): Promise<boolean> {
-  const frontendUrl = process.env.VITE_FRONTEND_URL || 'https://cocokusuri.com';
+  const frontendUrl = process.env.VITE_FRONTEND_URL || 'https://koreamall24.com';
   try {
     const emailContent = `
       <!DOCTYPE html>
